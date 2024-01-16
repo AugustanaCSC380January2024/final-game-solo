@@ -14,7 +14,7 @@ const speed = 70
 @onready var health_bar = $HealthBar
 @onready var weapon_timer = $WeaponTimer
 
-var energy_orb_scene = preload("res://Scenes/energy_orb.tscn")
+var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 
 func _ready():
 	projectile_container = get_node("ProjectileContainer")
@@ -28,27 +28,32 @@ func _physics_process(delta: float):
 	if direction.x > 0:
 		animated_sprite.flip_h = false
 	velocity = direction * speed
-	if (!dead):
+	if (!dead && (abs(player.global_position.x - global_position.x) > 30) || (abs(player.global_position.y - global_position.y) > 30)):
 		move_and_slide()
 		update_animations(direction)
 	
 func make_path():
-	navigation_agent.target_position = player.global_position + Vector2(5,5)
+	if !dead:
+		navigation_agent.target_position = player.global_position
 
 
 func _on_timer_timeout():
 	make_path()
 	
 func update_animations(direction):
-	if direction == Vector2.ZERO:
-		animated_sprite.play("idle")
-	else:
-		animated_sprite.play("run")
+	if !dead:
+		if direction == Vector2.ZERO:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("run")
 		
-func take_damage():
-	health -= 1
+func take_damage(damage):
+	health -= damage
 	health_bar.value = health
 	if health == 0:
+		die()
+
+func die():
 		dead = true
 		velocity = Vector2.ZERO
 		animated_sprite.play("die")
@@ -59,26 +64,24 @@ func set_health_bar():
 	health_bar.value = health
 
 
+func shoot(body):
+	print("Shooting")
+	var lazer_ball = lazer_ball_scene.instantiate()
+	lazer_ball.global_position = global_position
+	lazer_ball.position = position
+	lazer_ball.direction = -body.global_position.direction_to(position)
+	projectile_container.add_child(lazer_ball)
+
+
 func _on_range_body_entered(body):
 	if body.is_in_group("player"):
 		player_in_range = true
-		#weapon_timer.start()
-
-func shoot(body):
-	print("Shooting")
-	var energy_orb = energy_orb_scene.instantiate()
-	energy_orb.set_collision_mask_value(3, false)
-	energy_orb.set_collision_mask_value(2, true)
-	energy_orb.global_position = global_position
-	energy_orb.position = position
-	energy_orb.direction = -body.global_position.direction_to(position)
-	projectile_container.add_child(energy_orb)
-
-
+		weapon_timer.start()
+		
 func _on_range_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
-		#weapon_timer.stop()
+		weapon_timer.stop()
 
 
 func _on_weapon_timer_timeout():

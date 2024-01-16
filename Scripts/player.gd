@@ -8,7 +8,7 @@ extends CharacterBody2D
 
 var energy_orb_container
 
-var energy_orb_scene = preload("res://Scenes/energy_orb.tscn")
+var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
 func _ready():
 	energy_orb_container = get_node("EnergyOrbContainer")
@@ -42,4 +42,6 @@ func shoot():
 	energy_orb.position = position
 	energy_orb.direction = -get_global_mouse_position().direction_to(position)
 	energy_orb_container.add_child(energy_orb)
-	
+
+func take_damage(damage):
+	health -= damage
