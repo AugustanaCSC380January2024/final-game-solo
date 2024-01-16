@@ -147,7 +147,7 @@ script = ExtResource("1_bs184")
 sprite_frames = SubResource("SpriteFrames_qumam")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.518698
+frame_progress = 0.211359
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -5)
@@ -159,18 +159,5 @@ debug_enabled = true
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
-
-[node name="HealthBar" type="ProgressBar" parent="."]
-modulate = Color(0.235294, 1, 0, 1)
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -11.5
-offset_top = -21.0
-offset_right = 11.5
-offset_bottom = -16.0
-grow_horizontal = 2
-step = 1.0
-show_percentage = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
