@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=8 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/tileset x1.png" id="1_fnod5"]
 [ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_gj2y7"]
 [ext_resource type="PackedScene" uid="uid://ceb0lywmhusla" path="res://Scenes/enemy.tscn" id="3_2amh0"]
+[ext_resource type="PackedScene" uid="uid://ctbv1f1m8infe" path="res://Scenes/energy_orb.tscn" id="4_trnd4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgrit"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -2975,3 +2976,6 @@ position = Vector2(533, 432)
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_2amh0")]
 position = Vector2(715, 393)
 player = NodePath("../Player")
+
+[node name="EnergyOrb" parent="." instance=ExtResource("4_trnd4")]
+position = Vector2(521, 367)

@@ -4,6 +4,18 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var energy_orb_container
+
+var energy_orb_scene = preload("res://Scenes/energy_orb.tscn")
+
+func _ready():
+	energy_orb_container = get_node("EnergyOrbContainer")
+
+func _process(delta):
+	if Input.is_action_just_pressed("shoot"):
+		print("Loading")
+		shoot()
+
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
@@ -22,4 +34,12 @@ func update_animations(direction):
 		animated_sprite.play("idle")
 	else:
 		animated_sprite.play("walking")
+		
+func shoot():
+	print("Shooting")
+	var energy_orb = energy_orb_scene.instantiate()
+	energy_orb.global_position = global_position
+	energy_orb.position = position
+	energy_orb.direction = -get_global_mouse_position().direction_to(position)
+	energy_orb_container.add_child(energy_orb)
 	
