@@ -1,18 +1,23 @@
 extends CharacterBody2D
 
-@export var health = 2 
-
+var projectile_container
 var dead = false
+var player_in_range = false
 
 const speed = 70
 
+@export var health = 2 
 @export var player: Node2D
 
 @onready var navigation_agent := $NavigationAgent2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
+@onready var weapon_timer = $WeaponTimer
+
+var energy_orb_scene = preload("res://Scenes/energy_orb.tscn")
 
 func _ready():
+	projectile_container = get_node("ProjectileContainer")
 	health_bar.max_value = health
 	set_health_bar()
 
@@ -52,3 +57,30 @@ func take_damage():
 		
 func set_health_bar():
 	health_bar.value = health
+
+
+func _on_range_body_entered(body):
+	if body.is_in_group("player"):
+		player_in_range = true
+		#weapon_timer.start()
+
+func shoot(body):
+	print("Shooting")
+	var energy_orb = energy_orb_scene.instantiate()
+	energy_orb.set_collision_mask_value(3, false)
+	energy_orb.set_collision_mask_value(2, true)
+	energy_orb.global_position = global_position
+	energy_orb.position = position
+	energy_orb.direction = -body.global_position.direction_to(position)
+	projectile_container.add_child(energy_orb)
+
+
+func _on_range_body_exited(body):
+	if body.is_in_group("player"):
+		player_in_range = false
+		#weapon_timer.stop()
+
+
+func _on_weapon_timer_timeout():
+	if player_in_range:
+		shoot(player)

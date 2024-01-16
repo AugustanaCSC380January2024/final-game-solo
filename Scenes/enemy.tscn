@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ceb0lywmhusla"]
+[gd_scene load_steps=22 format=3 uid="uid://ceb0lywmhusla"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_bs184"]
 [ext_resource type="Texture2D" uid="uid://bfp7525ngeh5g" path="res://Assets/enemies x1.png" id="1_e25oh"]
@@ -136,6 +136,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_3m0wo"]
 radius = 9.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mwe37"]
+radius = 120.004
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 3
@@ -147,7 +150,7 @@ script = ExtResource("1_bs184")
 sprite_frames = SubResource("SpriteFrames_qumam")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.518698
+frame_progress = 0.680382
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, -5)
@@ -156,7 +159,7 @@ shape = SubResource("CircleShape2D_3m0wo")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
@@ -173,4 +176,20 @@ grow_horizontal = 2
 step = 1.0
 show_percentage = false
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="RangeBox" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_mwe37")
+
+[node name="ProjectileContainer" type="Node" parent="."]
+
+[node name="WeaponTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="NavigationTimer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
+[connection signal="timeout" from="WeaponTimer" to="." method="_on_weapon_timer_timeout"]

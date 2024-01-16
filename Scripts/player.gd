@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var health = 10
+
 @export var speed = 100
 
 @onready var animated_sprite = $AnimatedSprite2D
@@ -13,7 +15,6 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("shoot"):
-		print("Loading")
 		shoot()
 
 func _physics_process(delta):
@@ -36,7 +37,6 @@ func update_animations(direction):
 		animated_sprite.play("walking")
 		
 func shoot():
-	print("Shooting")
 	var energy_orb = energy_orb_scene.instantiate()
 	energy_orb.global_position = global_position
 	energy_orb.position = position
