@@ -5,21 +5,27 @@ extends CharacterBody2D
 @export var speed = 100
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var health_bar = $UI/HUD/ProgressBar
 
 var energy_orb_container
+var alive = true
 
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
 func _ready():
 	energy_orb_container = get_node("EnergyOrbContainer")
+	health_bar.max_value = health
+	health_bar.value = health
 
 func _process(delta):
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	if alive:
+		if Input.is_action_just_pressed("shoot"):
+			shoot()
 
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	if alive:
+		get_input()
+		move_and_slide()
 	
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -45,3 +51,14 @@ func shoot():
 
 func take_damage(damage):
 	health -= damage
+	$UI/HUD/ProgressBar.value = health
+	if health <= 0:
+		die()
+
+func die():
+	print("Dead")
+	alive = false
+	velocity = Vector2.ZERO
+	animated_sprite.play("die")
+	await get_tree().create_timer(.8).timeout
+	animated_sprite.visible = false
