@@ -66,6 +66,7 @@ func set_health_bar():
 
 func shoot(body):
 	print("Shooting")
+	animated_sprite.play("shoot")
 	var lazer_ball = lazer_ball_scene.instantiate()
 	lazer_ball.global_position = global_position
 	lazer_ball.position = position
@@ -87,3 +88,5 @@ func _on_range_body_exited(body):
 func _on_weapon_timer_timeout():
 	if player_in_range:
 		shoot(player)
+
+

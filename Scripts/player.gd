@@ -6,6 +6,9 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HUD/ProgressBar
+@onready var animation_player = $AnimationPlayer
+
+var animation_playing = false
 
 var energy_orb_container
 var alive = true
@@ -34,7 +37,8 @@ func get_input():
 	else:
 		animated_sprite.flip_h = false
 	velocity = input_direction * speed
-	update_animations(input_direction)
+	if !animation_player.is_playing():
+		update_animations(input_direction)
 	
 func update_animations(direction):
 	if direction == Vector2.ZERO:
@@ -44,6 +48,7 @@ func update_animations(direction):
 		
 func shoot():
 	var energy_orb = energy_orb_scene.instantiate()
+	animation_player.play("shoot")
 	energy_orb.global_position = global_position
 	energy_orb.position = position
 	energy_orb.direction = -get_global_mouse_position().direction_to(position)
@@ -59,6 +64,6 @@ func die():
 	print("Dead")
 	alive = false
 	velocity = Vector2.ZERO
-	animated_sprite.play("die")
-	await get_tree().create_timer(.8).timeout
+	animation_player.play("die")
+	await animation_player.animation_finished
 	animated_sprite.visible = false
