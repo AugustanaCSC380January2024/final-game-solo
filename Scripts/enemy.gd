@@ -13,6 +13,7 @@ const speed = 70
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
 @onready var weapon_timer = $WeaponTimer
+@onready var animation_player = $AnimationPlayer
 
 var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 
@@ -30,7 +31,8 @@ func _physics_process(delta: float):
 	velocity = direction * speed
 	if (!dead && (abs(player.global_position.x - global_position.x) > 30) || (abs(player.global_position.y - global_position.y) > 30)):
 		move_and_slide()
-		update_animations(direction)
+		if !animation_player.is_playing():
+			update_animations(direction)
 	
 func make_path():
 	if !dead:
@@ -56,8 +58,9 @@ func take_damage(damage):
 func die():
 		dead = true
 		velocity = Vector2.ZERO
-		animated_sprite.play("die")
-		await get_tree().create_timer(.7).timeout
+		health_bar.visible = false
+		animation_player.play("die")
+		await animation_player.animation_finished
 		queue_free()
 		
 func set_health_bar():
@@ -65,13 +68,15 @@ func set_health_bar():
 
 
 func shoot(body):
-	print("Shooting")
-	animated_sprite.play("shoot")
-	var lazer_ball = lazer_ball_scene.instantiate()
-	lazer_ball.global_position = global_position
-	lazer_ball.position = position
-	lazer_ball.direction = -body.global_position.direction_to(position)
-	projectile_container.add_child(lazer_ball)
+	if !dead:
+		print("Shooting")
+		animation_player.play("shoot")
+		await animation_player.animation_finished
+		var lazer_ball = lazer_ball_scene.instantiate()
+		lazer_ball.global_position = global_position
+		lazer_ball.position = position
+		lazer_ball.direction = -body.global_position.direction_to(position)
+		projectile_container.add_child(lazer_ball)
 
 
 func _on_range_body_entered(body):
