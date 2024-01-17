@@ -207,7 +207,5 @@ script = ExtResource("2_pum37")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_y5rma")
+animation = &"die"
 autoplay = ""
-
-[node name="WeaponTimer" parent="." index="7"]
-wait_time = 3.0

@@ -3,11 +3,13 @@ extends CharacterBody2D
 var projectile_container
 var dead = false
 var player_in_range = false
+var stopped = false
 
 const speed = 70
 
 @export var health = 2 
 @export var player: Node2D
+var desired_distance_from_player = 30
 
 @onready var navigation_agent := $NavigationAgent2D
 @onready var animated_sprite = $AnimatedSprite2D
@@ -29,13 +31,13 @@ func _physics_process(delta: float):
 	if direction.x > 0:
 		animated_sprite.flip_h = false
 	velocity = direction * speed
-	if (!dead && (abs(player.global_position.x - global_position.x) > 30) || (abs(player.global_position.y - global_position.y) > 30)):
+	if (!dead && !stopped && (abs(player.global_position.x - global_position.x) > desired_distance_from_player) || (abs(player.global_position.y - global_position.y) > desired_distance_from_player)):
 		move_and_slide()
 		if !animation_player.is_playing():
 			update_animations(direction)
 	
 func make_path():
-	if !dead:
+	if !dead && !stopped:
 		navigation_agent.target_position = player.global_position
 
 
@@ -43,7 +45,7 @@ func _on_timer_timeout():
 	make_path()
 	
 func update_animations(direction):
-	if !dead:
+	if !dead && !stopped:
 		if direction == Vector2.ZERO:
 			animated_sprite.play("idle")
 		else:
@@ -72,11 +74,8 @@ func shoot(body):
 		print("Shooting")
 		animation_player.play("shoot")
 		await animation_player.animation_finished
-		var lazer_ball = lazer_ball_scene.instantiate()
-		lazer_ball.global_position = global_position
-		lazer_ball.position = position
-		lazer_ball.direction = -body.global_position.direction_to(position)
-		projectile_container.add_child(lazer_ball)
+		var projectile = generate_projectile(body)
+		projectile_container.add_child(projectile)
 
 
 func _on_range_body_entered(body):
@@ -93,5 +92,18 @@ func _on_range_body_exited(body):
 func _on_weapon_timer_timeout():
 	if player_in_range:
 		shoot(player)
+		
+func stop_movement():
+	if stopped:
+		stopped = false
+	else:
+		stopped = true
+
+func generate_projectile(body):
+	var lazer_ball = lazer_ball_scene.instantiate()
+	lazer_ball.global_position = global_position
+	lazer_ball.position = position
+	lazer_ball.direction = -body.global_position.direction_to(position)
+	return lazer_ball
 
 

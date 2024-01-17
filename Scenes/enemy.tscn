@@ -178,7 +178,7 @@ animations = [{
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mwe37"]
-radius = 120.004
+radius = 219.002
 
 [sub_resource type="Animation" id="Animation_da0je"]
 resource_name = "die"
@@ -227,7 +227,7 @@ script = ExtResource("1_bs184")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qumam")
-animation = &"die"
+animation = &"shoot"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

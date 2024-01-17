@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=9 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/tileset x1.png" id="1_4oy4i"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_nfu3v"]
 [ext_resource type="PackedScene" uid="uid://ceb0lywmhusla" path="res://Scenes/enemy.tscn" id="3_qvg7o"]
+[ext_resource type="PackedScene" uid="uid://chqjk68g6bf13" path="res://Scenes/large_enemy.tscn" id="5_a5sl0"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgrit"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -2976,4 +2977,8 @@ position = Vector2(533, 432)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_qvg7o")]
 position = Vector2(715, 393)
+player = NodePath("../Player")
+
+[node name="LargeEnemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_a5sl0")]
+position = Vector2(748, 463)
 player = NodePath("../Player")
