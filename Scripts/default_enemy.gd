@@ -6,6 +6,7 @@ var player_in_range = false
 var beacon_in_range = false
 var current_health = 0
 
+
 @export var max_speed = 100
 @export var speed = 70
 @export var health = 2
@@ -64,7 +65,7 @@ func update_animations(direction):
 
 func take_damage(damage):
 	current_health += damage
-	health_bar.value = current_health
+	set_health_bar()
 	if current_health >= health:
 		die()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=8 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="PackedScene" uid="uid://b1w8hy0r2u7a4" path="res://Scenes/level.tscn" id="2_i7anh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ceb0lywmhusla" path="res://Scenes/enemy.tscn" id="3_qvg7o"]
 [ext_resource type="PackedScene" uid="uid://chqjk68g6bf13" path="res://Scenes/large_enemy.tscn" id="5_a5sl0"]
 [ext_resource type="PackedScene" uid="uid://b4oyb11633xu" path="res://Scenes/beacon.tscn" id="6_87qat"]
+[ext_resource type="PackedScene" uid="uid://b1glgh8v4uhpv" path="res://Scenes/pause_menu.tscn" id="7_3m5yg"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wvqwh")
@@ -27,3 +28,8 @@ beacon = NodePath("../Beacon")
 position = Vector2(585, 127)
 player = NodePath("../Player")
 beacon = NodePath("../Beacon")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_3m5yg")]
+visible = false

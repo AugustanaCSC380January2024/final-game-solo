@@ -7,8 +7,6 @@ var damage: float
 
 @onready var animated_sprite = $AnimatedSprite2D
 
-#func _ready():
-	#animated_sprite.animation = sprite_in
 
 func _physics_process(delta):
 	animated_sprite.look_at(direction)
