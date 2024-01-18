@@ -3,6 +3,8 @@ extends DefaultEnemy
 var lazer_ball_big_scene = preload("res://Scenes/Projectiles/lazer_ball_big.tscn")
 @onready var animation_player_big = $AnimationPlayer
 
+var base_damage = 4
+
 func _ready():
 	health = 10
 
@@ -14,6 +16,7 @@ func shoot(body):
 	
 func generate_projectile(body):
 	var lazer_ball_big = lazer_ball_big_scene.instantiate()
+	lazer_ball_big.damage = base_damage + current_health
 	lazer_ball_big.global_position = global_position
 	lazer_ball_big.position = position
 	lazer_ball_big.direction = -body.global_position.direction_to(position)

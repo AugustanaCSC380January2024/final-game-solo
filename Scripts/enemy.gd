@@ -2,6 +2,8 @@ extends DefaultEnemy
 
 var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 
+var base_damage = 2
+
 func shoot(body):
 	super.shoot(body)
 	if alive:
@@ -21,6 +23,6 @@ func generate_projectile(body):
 	lazer_ball.global_position = global_position
 	lazer_ball.position = position
 	lazer_ball.direction = -body.global_position.direction_to(position)
-	lazer_ball.damage += current_health
+	lazer_ball.damage += base_damage + current_health
 	return lazer_ball
 

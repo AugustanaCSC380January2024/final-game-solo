@@ -3,7 +3,7 @@ extends Area2D
 @export var direction: Vector2
 @export var speed: float = 150
 @export var sprite_in: AnimatedSprite2D
-@export var damage: float = 5
+var damage: float
 
 @onready var animated_sprite = $AnimatedSprite2D
 
