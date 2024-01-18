@@ -69,6 +69,7 @@ func take_damage(damage):
 
 func die():
 		alive = false
+		animation_player.stop()
 		velocity = Vector2.ZERO
 		health_bar.visible = false
 		animation_player.play("die")
@@ -97,8 +98,9 @@ func _on_range_body_exited(body):
 		weapon_timer.stop()
 
 func shoot(body):
-	animation_player.play("shoot")
-	await animation_player.animation_finished
+	if alive:
+		animation_player.play("shoot")
+		await animation_player.animation_finished
 
 
 

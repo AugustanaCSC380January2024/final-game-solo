@@ -8,6 +8,8 @@
 radius = 4.12311
 
 [node name="Rocket" type="Area2D" groups=["enemy_projectile"]]
+collision_layer = 16
+collision_mask = 35
 script = ExtResource("1_ie8ew")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

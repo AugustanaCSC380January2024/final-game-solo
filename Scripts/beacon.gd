@@ -1,9 +1,10 @@
 extends StaticBody2D
 
-@export var health = 1000
+@export var max_health = 1000
+var current_health = 0
 
 func _ready():
-	health = 0
-	print(global_position)
+	current_health = 0
 func take_damage(damage):
-	health += damage
+	current_health += damage
+	print(str(current_health) + "/" + str(max_health))
