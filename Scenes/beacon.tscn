@@ -51,10 +51,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_22euv"]
-size = Vector2(62.5, 41.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hqrh"]
+size = Vector2(62, 42)
 
-[node name="StaticBody2D" type="StaticBody2D" groups=["beacon"]]
+[node name="Beacon" type="StaticBody2D" groups=["beacon"]]
 collision_layer = 32
 collision_mask = 22
 script = ExtResource("1_srbwx")
@@ -66,5 +66,5 @@ sprite_frames = SubResource("SpriteFrames_v6gks")
 animation = &"on"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -1)
-shape = SubResource("RectangleShape2D_22euv")
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_1hqrh")

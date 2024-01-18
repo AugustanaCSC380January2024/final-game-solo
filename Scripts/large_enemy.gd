@@ -18,8 +18,7 @@ func generate_projectile(body):
 	var lazer_ball_big = lazer_ball_big_scene.instantiate()
 	lazer_ball_big.damage = base_damage + current_health
 	lazer_ball_big.global_position = global_position
-	lazer_ball_big.position = position
-	lazer_ball_big.direction = -body.global_position.direction_to(position)
+	lazer_ball_big.direction = -body.global_position.direction_to(global_position)
 	return lazer_ball_big
 	
 func _on_weapon_timer_timeout():

@@ -49,6 +49,7 @@ func update_animations(direction):
 func shoot():
 	var energy_orb = energy_orb_scene.instantiate()
 	energy_orb.damage = 1
+	energy_orb.friendly = true
 	animation_player.play("shoot")
 	energy_orb.global_position = global_position
 	energy_orb.position = position

@@ -20,9 +20,10 @@ var current_health = 0
 @onready var weapon_timer = get_node("WeaponTimer")
 @onready var animation_player = get_node("AnimationPlayer")
 @onready var range = get_node("Range")
+@onready var collision_box = get_node("CollisionShape2D")
 
 var player_detection_distance = 20
-var distance_offset = 20.0
+var distance_offset = 10
 
 func _ready():
 	health_bar.max_value = health
@@ -38,7 +39,9 @@ func _physics_process(delta: float):
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if ((x_distance_from_beacon <= distance_offset || y_distance_from_beacon <= distance_offset) || player_in_range):
+		print(x_distance_from_beacon)
+		print(y_distance_from_beacon)
+		if ((x_distance_from_beacon > distance_offset && y_distance_from_beacon > distance_offset) || player_in_range):
 			move_and_slide()
 			if !animation_player.is_playing():
 				update_animations(direction)
@@ -71,12 +74,14 @@ func take_damage(damage):
 
 func die():
 		alive = false
+		collision_box.disabled = true
 		animation_player.stop()
 		velocity = Vector2.ZERO
 		health_bar.visible = false
 		animation_player.play("die")
 		await animation_player.animation_finished
-		queue_free()
+		free()
+		#queue_free()
 
 func set_health_bar():
 	health_bar.value = current_health

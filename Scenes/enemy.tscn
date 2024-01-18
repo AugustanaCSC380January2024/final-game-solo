@@ -182,7 +182,7 @@ radius = 74.027
 
 [sub_resource type="Animation" id="Animation_da0je"]
 resource_name = "die"
-length = 2.0
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -235,6 +235,7 @@ position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_3m0wo")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="NavigationTimer" type="Timer" parent="."]
 wait_time = 0.5
