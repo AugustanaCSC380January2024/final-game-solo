@@ -42,7 +42,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lv2j2"]
 radius = 16.0
 
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="Area2D" groups=["enemy_projectile"]]
 script = ExtResource("1_cxbf4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

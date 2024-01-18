@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/Characters/State Machine.gd" id="2_4wdtw"]
 
 [node name="Character" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_66ock")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

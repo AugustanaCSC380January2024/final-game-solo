@@ -18,4 +18,4 @@ func _physics_process(delta):
 func move():
 	movement_direction = movement_direction.normalized()
 	velocity += movement_direction * acceleration
-	velocity = velocity.clamp(Vector2.ZERO, Vector2(max_speed,max_speed))
+	velocity = velocity.limit_length(max_speed)

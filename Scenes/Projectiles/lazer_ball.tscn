@@ -42,7 +42,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_6o433"]
 radius = 4.12311
 
-[node name="LazerBall" type="Area2D"]
+[node name="LazerBall" type="Area2D" groups=["enemy_projectile"]]
 collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_lf3nm")
