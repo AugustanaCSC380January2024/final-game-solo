@@ -6,6 +6,7 @@ var player_in_range = false
 var beacon_in_range = false
 var current_health = 0
 
+@export var max_speed = 100
 @export var speed = 70
 @export var health = 2
 @export var player: Node2D
@@ -36,7 +37,7 @@ func _physics_process(delta: float):
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if (x_distance_from_beacon <= distance_offset || y_distance_from_beacon <= distance_offset) || player_in_range:
+		if ((x_distance_from_beacon <= distance_offset || y_distance_from_beacon <= distance_offset) || player_in_range):
 			move_and_slide()
 			if !animation_player.is_playing():
 				update_animations(direction)

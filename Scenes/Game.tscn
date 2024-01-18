@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=7 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="PackedScene" uid="uid://b1w8hy0r2u7a4" path="res://Scenes/level.tscn" id="2_i7anh"]
 [ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_nfu3v"]
 [ext_resource type="PackedScene" uid="uid://ceb0lywmhusla" path="res://Scenes/enemy.tscn" id="3_qvg7o"]
+[ext_resource type="PackedScene" uid="uid://chqjk68g6bf13" path="res://Scenes/large_enemy.tscn" id="5_a5sl0"]
 [ext_resource type="PackedScene" uid="uid://b4oyb11633xu" path="res://Scenes/beacon.tscn" id="6_87qat"]
 
 [node name="Game" type="Node2D"]
@@ -19,5 +20,10 @@ position = Vector2(573, 429)
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player", "beacon") instance=ExtResource("3_qvg7o")]
 position = Vector2(883, 371)
+player = NodePath("../Player")
+beacon = NodePath("../Beacon")
+
+[node name="LargeEnemy" parent="." node_paths=PackedStringArray("player", "beacon") instance=ExtResource("5_a5sl0")]
+position = Vector2(585, 127)
 player = NodePath("../Player")
 beacon = NodePath("../Beacon")

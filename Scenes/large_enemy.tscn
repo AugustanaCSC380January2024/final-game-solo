@@ -209,5 +209,9 @@ script = ExtResource("2_pum37")
 sprite_frames = SubResource("SpriteFrames_y5rma")
 autoplay = ""
 
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 0)
+scale = Vector2(1.33185, 1.33185)
+
 [node name="WeaponTimer" parent="." index="7"]
 wait_time = 3.0

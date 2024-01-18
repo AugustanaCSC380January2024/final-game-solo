@@ -1,16 +1,16 @@
-extends "res://Scripts/enemy.gd"
+extends DefaultEnemy
 
 var lazer_ball_big_scene = preload("res://Scenes/Projectiles/lazer_ball_big.tscn")
 @onready var animation_player_big = $AnimationPlayer
 
-
+func _ready():
+	health = 10
 
 func shoot(body):
-	if !stopped:
-		stop_movement()
-		super.shoot(body)
-		await animation_player_big.animation_finished
-		stop_movement()
+	super.shoot(body)
+	if alive:
+		var projectile = generate_projectile(body)
+		projectile_container.add_child(projectile)
 	
 func generate_projectile(body):
 	var lazer_ball_big = lazer_ball_big_scene.instantiate()
@@ -18,5 +18,12 @@ func generate_projectile(body):
 	lazer_ball_big.position = position
 	lazer_ball_big.direction = -body.global_position.direction_to(position)
 	return lazer_ball_big
+	
+func _on_weapon_timer_timeout():
+	if player_in_range:
+		shoot(player)
+	elif beacon_in_range:
+		shoot(beacon)
+		
 	
 	
