@@ -1,103 +1,20 @@
-extends CharacterBody2D
-
-var projectile_container
-var dead = false
-var player_in_range = false
-var stopped = false
-
-const speed = 70
-
-@export var health = 2 
-@export var player: Node2D
-var desired_distance_from_player = 30
-
-@onready var navigation_agent := $NavigationAgent2D
-@onready var animated_sprite = $AnimatedSprite2D
-@onready var health_bar = $HealthBar
-@onready var weapon_timer = $WeaponTimer
-@onready var animation_player = $AnimationPlayer
+extends DefaultEnemy
 
 var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 
-func _ready():
-	projectile_container = get_node("ProjectileContainer")
-	health_bar.max_value = health
-	set_health_bar()
-
-func _physics_process(delta: float):
-	var direction = to_local(navigation_agent.get_next_path_position()).normalized()
-	if direction.x < 0:
-		animated_sprite.flip_h = true
-	if direction.x > 0:
-		animated_sprite.flip_h = false
-	velocity = direction * speed
-	if (!dead && !stopped && (abs(player.global_position.x - global_position.x) > desired_distance_from_player) || (abs(player.global_position.y - global_position.y) > desired_distance_from_player)):
-		move_and_slide()
-		if !animation_player.is_playing():
-			update_animations(direction)
-	
-func make_path():
-	if !dead && !stopped:
-		navigation_agent.target_position = player.global_position
-
-
-func _on_timer_timeout():
-	make_path()
-	
-func update_animations(direction):
-	if !dead && !stopped:
-		if direction == Vector2.ZERO:
-			animated_sprite.play("idle")
-		else:
-			animated_sprite.play("run")
-		
-func take_damage(damage):
-	health -= damage
-	health_bar.value = health
-	if health == 0:
-		die()
-
-func die():
-		dead = true
-		velocity = Vector2.ZERO
-		health_bar.visible = false
-		animation_player.play("die")
-		await animation_player.animation_finished
-		queue_free()
-		
-func set_health_bar():
-	health_bar.value = health
-
-
 func shoot(body):
-	if !dead:
-		print("Shooting")
-		animation_player.play("shoot")
-		await animation_player.animation_finished
+	super.shoot(body)
+	if alive:
 		var projectile = generate_projectile(body)
 		projectile_container.add_child(projectile)
-
-
-func _on_range_body_entered(body):
-	if body.is_in_group("player"):
-		player_in_range = true
-		weapon_timer.start()
-		
-func _on_range_body_exited(body):
-	if body.is_in_group("player"):
-		player_in_range = false
-		weapon_timer.stop()
 
 
 func _on_weapon_timer_timeout():
 	if player_in_range:
 		shoot(player)
+	elif beacon_in_range:
+		shoot(beacon)
 		
-func stop_movement():
-	if stopped:
-		stopped = false
-	else:
-		stopped = true
 
 func generate_projectile(body):
 	var lazer_ball = lazer_ball_scene.instantiate()
@@ -105,5 +22,4 @@ func generate_projectile(body):
 	lazer_ball.position = position
 	lazer_ball.direction = -body.global_position.direction_to(position)
 	return lazer_ball
-
 

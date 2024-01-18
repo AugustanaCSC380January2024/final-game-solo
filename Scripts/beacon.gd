@@ -4,5 +4,6 @@ extends StaticBody2D
 
 func _ready():
 	health = 0
+	print(global_position)
 func take_damage(damage):
 	health += damage
