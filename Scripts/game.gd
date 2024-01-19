@@ -4,6 +4,9 @@ extends Node2D
 @onready var player = get_node("Player")
 @onready var beacon = get_node("Beacon")
 @onready var spawn_timer = $SpawnTimer
+@onready var round_start_label = $CanvasLayer/RoundStartLabel
+@onready var round_label_timer = $CanvasLayer/RoundStartLabel/RoundLabelTimer
+
 
 
 var round = 1
@@ -53,8 +56,14 @@ func round_complete():
 	print("Round Complete")
 
 func start_round():
-	round_ongoing = true
-	spawn_enemies(first_round_enemy_count * scaling_difficulty, player, beacon)
+	if !round_ongoing:
+		round_ongoing = true
+		round_start_label.text = "Round " + str(round)
+		round_start_label.visible = true
+		round_label_timer.start()
+		await round_label_timer.timeout
+		round_start_label.visible = false
+		spawn_enemies(first_round_enemy_count * scaling_difficulty, player, beacon)
 	
 func test_connection():
 	print("Connection Working")
