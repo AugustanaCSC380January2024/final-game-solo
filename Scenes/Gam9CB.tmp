@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://moe1f3j4jv5q"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
+[ext_resource type="PackedScene" uid="uid://b1w8hy0r2u7a4" path="res://Scenes/level.tscn" id="2_i7anh"]
+[ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_nfu3v"]
+[ext_resource type="PackedScene" uid="uid://b4oyb11633xu" path="res://Scenes/beacon.tscn" id="6_87qat"]
+[ext_resource type="PackedScene" uid="uid://b1glgh8v4uhpv" path="res://Scenes/pause_menu.tscn" id="7_3m5yg"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_wvqwh")
+
+[node name="Level" parent="." instance=ExtResource("2_i7anh")]
+
+[node name="Beacon" parent="." instance=ExtResource("6_87qat")]
+position = Vector2(577, 386)
+
+[node name="Player" parent="." instance=ExtResource("2_nfu3v")]
+position = Vector2(573, 429)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RoundStartLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -76.0
+offset_right = 67.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "ROUND: "
+
+[node name="RoundLabelTimer" type="Timer" parent="CanvasLayer/RoundStartLabel"]
+wait_time = 4.0
+one_shot = true
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_3m5yg")]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

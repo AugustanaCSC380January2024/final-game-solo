@@ -53,6 +53,12 @@ func round_complete():
 	scaling_difficulty += scaling_difficulty * .5
 	done_spawning = false
 	round += 1
+	round_ongoing = false
+	round_start_label.text = "Round Complete"
+	round_start_label.visible = true
+	round_label_timer.start(4)
+	await round_label_timer.timeout
+	round_start_label.visible = false
 	print("Round Complete")
 
 func start_round():
