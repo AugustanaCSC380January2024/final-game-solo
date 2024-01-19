@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b4oyb11633xu"]
+[gd_scene load_steps=11 format=3 uid="uid://b4oyb11633xu"]
 
 [ext_resource type="Script" path="res://Scripts/beacon.gd" id="1_srbwx"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/props and items x1.png" id="2_2mhbx"]
@@ -54,6 +54,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hqrh"]
 size = Vector2(62, 42)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5q4yr"]
+radius = 76.531
+
 [node name="Beacon" type="StaticBody2D" groups=["beacon"]]
 collision_layer = 32
 collision_mask = 22
@@ -68,3 +71,10 @@ animation = &"on"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_1hqrh")
+
+[node name="StartRoundArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartRoundArea"]
+shape = SubResource("CircleShape2D_5q4yr")
+
+[connection signal="body_entered" from="StartRoundArea" to="." method="_on_start_round_area_body_entered"]

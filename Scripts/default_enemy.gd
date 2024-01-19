@@ -69,11 +69,12 @@ func update_animations(direction):
 			animated_sprite.play("run")
 
 func take_damage(damage):
-	current_health += damage
-	set_health_bar()
-	scale += Vector2(.01, .01)
-	if current_health >= health:
-		die()
+	if alive:
+		current_health += damage
+		set_health_bar()
+		scale += Vector2(.01, .01)
+		if current_health >= health:
+			die()
 
 func die():
 		alive = false
