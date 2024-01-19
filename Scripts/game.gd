@@ -50,12 +50,12 @@ func get_spawn_areas():
 func clear_spawn_area():
 	spawn_areas.clear()
 	
-func spawn_enemies(amount, player, beacon):
+func spawn_enemies(amount, player, beacon, scaling_difficulty):
 	for enemy_num in amount:
 		spawn_timer.start(randf() * 5)
 		await spawn_timer.timeout
 		var random_spawn = spawn_areas.pick_random()
-		random_spawn.spawn_enemy(player, beacon)
+		random_spawn.spawn_enemy(player, beacon, scaling_difficulty)
 		print("Spawning")
 	done_spawning = true
 	print("Done Spawning")
@@ -91,7 +91,7 @@ func start_round():
 		round_label_timer.start()
 		await round_label_timer.timeout
 		round_start_label.visible = false
-		spawn_enemies(first_round_enemy_count * scaling_difficulty, player, beacon)
+		spawn_enemies(first_round_enemy_count * scaling_difficulty, player, beacon, scaling_difficulty)
 	
 func test_connection():
 	print("Connection Working")

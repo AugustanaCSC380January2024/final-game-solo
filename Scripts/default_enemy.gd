@@ -23,11 +23,14 @@ var current_health = 0
 @onready var collision_box = get_node("CollisionShape2D")
 
 var player_detection_distance = 20
-var distance_offset = 10
+var distance_offset = 64
+var beacon_location = Vector2.ZERO
 
 func _ready():
 	health_bar.max_value = health
 	set_health_bar()
+	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
+	
 
 func _physics_process(delta: float):
 	var direction = to_local(navigation_agent.get_next_path_position()).normalized()
@@ -39,7 +42,7 @@ func _physics_process(delta: float):
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if true: #((!(x_distance_from_beacon <= distance_offset || y_distance_from_beacon <= distance_offset)) && global_position - beacon.global_position > Vector2(distance_offset, distance_offset) || player_in_range):
+		if (!((beacon.global_position.x - distance_offset <= global_position.x and global_position.x <= beacon.global_position.x + distance_offset) and (beacon.global_position.y - distance_offset <= global_position.y and global_position.y <= beacon.global_position.y + distance_offset)) || player_in_range):
 			#print("I SHOULD BE SLIDING")
 			move_and_slide()
 			if !animation_player.is_playing():
@@ -56,7 +59,8 @@ func make_path():
 			navigation_agent.target_position = player.global_position
 		else:
 			if x_distance_from_beacon > distance_offset || y_distance_from_beacon > distance_offset:
-				navigation_agent.target_position = beacon.global_position
+				
+				navigation_agent.target_position = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 		
 func _on_timer_timeout():
 	make_path()
