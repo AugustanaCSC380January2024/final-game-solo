@@ -13,7 +13,3 @@ func take_damage(damage):
 
 
 
-
-func _on_start_round_area_body_entered(body):
-	if body.is_in_group("player"):
-		print("called")

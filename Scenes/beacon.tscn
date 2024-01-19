@@ -73,8 +73,8 @@ position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_1hqrh")
 
 [node name="StartRoundArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartRoundArea"]
 shape = SubResource("CircleShape2D_5q4yr")
-
-[connection signal="body_entered" from="StartRoundArea" to="." method="_on_start_round_area_body_entered"]
