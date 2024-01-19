@@ -10,6 +10,9 @@ var crosshair = preload("res://Assets/crosshair111.png")
 @onready var round_label_timer = $CanvasLayer/RoundStartLabel/RoundLabelTimer
 @onready var press_e_to_start_label = $"CanvasLayer/Press E to start"
 @onready var beacon_sprite = $Beacon/AnimatedSprite2D
+@onready var audio_stream_player = $RoundMusicPlayer
+@onready var round_over_player = $RoundOverPlayer
+
 
 
 
@@ -62,6 +65,9 @@ func _on_timer_timeout():
 	pass
 
 func round_complete():
+	round_over_player.stream = load("res://Music/short-round-110940.mp3")
+	round_over_player.play()
+	audio_stream_player.stop()
 	scaling_difficulty += scaling_difficulty * .5
 	done_spawning = false
 	round += 1
@@ -76,6 +82,8 @@ func round_complete():
 
 func start_round():
 	if !round_ongoing:
+		audio_stream_player.stream = load("res://Music/Automation (Synthwave).wav")
+		audio_stream_player.play()
 		round_ongoing = true
 		beacon_sprite.play("on")
 		round_start_label.text = "Round " + str(round)
