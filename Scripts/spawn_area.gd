@@ -14,6 +14,7 @@ func _ready():
 func spawn_enemy(player, beacon):
 	print("enemy spawned")
 	var spawnable_enemy = enemy_array.pick_random().instantiate()
+	spawnable_enemy.scale = Vector2(.6,.6)
 	spawnable_enemy.player = player
 	spawnable_enemy.beacon = beacon
 	add_child(spawnable_enemy)

@@ -4,6 +4,10 @@ extends Node2D
 @onready var player = get_node("Player")
 @onready var beacon = get_node("Beacon")
 
+var round = 1
+var first_round_enemy_count = 4
+var scaling_difficulty = 1
+
 var spawn_areas = []
 
 func _ready():
@@ -20,9 +24,6 @@ func spawn_enemies(amount, player, beacon):
 	for enemy_num in amount:
 		var random_spawn = spawn_areas.pick_random()
 		random_spawn.spawn_enemy(player, beacon)
-
-
-
 
 func _on_timer_timeout():
 	spawn_enemies(4, player, beacon)
