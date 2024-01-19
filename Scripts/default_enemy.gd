@@ -40,13 +40,13 @@ func _physics_process(delta: float):
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
 		if ((!(x_distance_from_beacon <= distance_offset || y_distance_from_beacon <= distance_offset)) && global_position - beacon.global_position > Vector2(distance_offset, distance_offset) || player_in_range):
-			print("I SHOULD BE SLIDING")
+			#print("I SHOULD BE SLIDING")
 			move_and_slide()
 			if !animation_player.is_playing():
 				update_animations(direction)
-		else:
-			print("x distance = " + str(x_distance_from_beacon))
-			print("y distance = " + str(y_distance_from_beacon))
+		#else:
+			#print("x distance = " + str(x_distance_from_beacon))
+			#print("y distance = " + str(y_distance_from_beacon))
 
 func make_path():
 	if alive:
@@ -71,6 +71,7 @@ func update_animations(direction):
 func take_damage(damage):
 	current_health += damage
 	set_health_bar()
+	scale += Vector2(.01, .01)
 	if current_health >= health:
 		die()
 
