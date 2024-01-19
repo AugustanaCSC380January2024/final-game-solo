@@ -107,10 +107,12 @@ func _on_range_body_entered(body):
 func _on_range_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_range = false
-		weapon_timer.stop()
+		if !beacon_in_range:
+			weapon_timer.stop()
 	elif body.is_in_group("beacon"):
 		beacon_in_range = false
-		weapon_timer.stop()
+		if !player_in_range:
+			weapon_timer.stop()
 
 func shoot(body):
 	if alive:
