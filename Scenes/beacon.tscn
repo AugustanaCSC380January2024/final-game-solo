@@ -55,7 +55,7 @@ animations = [{
 size = Vector2(62, 42)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q4yr"]
-radius = 76.531
+radius = 45.0111
 
 [node name="Beacon" type="StaticBody2D" groups=["beacon"]]
 collision_layer = 32
@@ -66,7 +66,7 @@ script = ExtResource("1_srbwx")
 position = Vector2(-2, -9)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_v6gks")
-animation = &"on"
+animation = &"off"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)

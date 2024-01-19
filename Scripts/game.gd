@@ -1,5 +1,7 @@
 extends Node2D
 
+var crosshair = preload("res://Assets/crosshair111.png")
+
 @onready var level = $Level/SpawnAreas
 @onready var player = get_node("Player")
 @onready var beacon = get_node("Beacon")
@@ -7,6 +9,7 @@ extends Node2D
 @onready var round_start_label = $CanvasLayer/RoundStartLabel
 @onready var round_label_timer = $CanvasLayer/RoundStartLabel/RoundLabelTimer
 @onready var press_e_to_start_label = $"CanvasLayer/Press E to start"
+@onready var beacon_sprite = $Beacon/AnimatedSprite2D
 
 
 
@@ -21,6 +24,7 @@ var spawn_areas = []
 
 func _ready():
 	get_spawn_areas()
+	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 	
 
 func _process(delta):
@@ -62,6 +66,7 @@ func round_complete():
 	done_spawning = false
 	round += 1
 	round_ongoing = false
+	beacon_sprite.play("off")
 	round_start_label.text = "Round Complete"
 	round_start_label.visible = true
 	round_label_timer.start(4)
@@ -72,6 +77,7 @@ func round_complete():
 func start_round():
 	if !round_ongoing:
 		round_ongoing = true
+		beacon_sprite.play("on")
 		round_start_label.text = "Round " + str(round)
 		round_start_label.visible = true
 		round_label_timer.start()
