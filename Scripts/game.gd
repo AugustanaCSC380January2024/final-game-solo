@@ -12,6 +12,7 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 @onready var beacon_sprite = $Beacon/AnimatedSprite2D
 @onready var audio_stream_player = $RoundMusicPlayer
 @onready var round_over_player = $RoundOverPlayer
+@onready var respawner = $CanvasLayer/Respawner
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -31,6 +32,7 @@ var spawn_areas = []
 func _ready():
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
+	player.player_die.connect(respawn_player)
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
@@ -139,3 +141,24 @@ func update_beacon_health():
 	
 func game_over():
 	print("Game Over")
+
+func respawn_player():
+	var respawn_timer = $"CanvasLayer/Respawner/Respawn Timer"
+	var respawn_pos = $Level/PlayerSpawn
+	var player_health_bar = $Player/UI/HUD/ProgressBar
+	var player_cam = $Player/Camera2D
+	print("Respawning Player")
+	player.global_position = Vector2(1000,1000)
+	respawner.visible = true
+	player_cam.global_position = beacon.global_position
+	respawner.respawn()
+	await respawn_timer.timeout
+	player.global_position = respawn_pos.global_position
+	player.alive = true
+	player.health = player.max_health
+	player.visible = true
+	player_cam.global_position = player.global_position
+	player_health_bar.value = player.health
+	respawner.visible = false
+	
+	

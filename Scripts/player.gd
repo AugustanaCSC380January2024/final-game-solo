@@ -1,10 +1,12 @@
 extends CharacterBody2D
 
+@export var max_health = 20
 @export var health = 20
 
 @export var speed = 100
 
 signal battery_collected
+signal player_die
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HUD/ProgressBar
@@ -36,6 +38,7 @@ func _ready():
 	hurt_sounds.append(hurt_sound_3)
 	hurt_sounds.append(hurt_sound_4)
 	energy_orb_container = get_node("EnergyOrbContainer")
+	health = max_health
 	health_bar.max_value = health
 	health_bar.value = health
 	shot_player.stream = shoot_sound
@@ -90,12 +93,14 @@ func take_damage(damage):
 		die()
 
 func die():
-	print("Dead")
-	alive = false
-	velocity = Vector2.ZERO
-	animation_player.play("die")
-	await animation_player.animation_finished
-	animated_sprite.visible = false
+	if alive:
+		print("Dead")
+		alive = false
+		velocity = Vector2.ZERO
+		animation_player.play("die")
+		await animation_player.animation_finished
+		visible = false
+		player_die.emit()
 
 
 

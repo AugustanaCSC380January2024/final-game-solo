@@ -4890,3 +4890,6 @@ scale = Vector2(1.6, 1.6)
 [node name="Spawn Area10" parent="SpawnAreas" instance=ExtResource("2_wdqyd")]
 position = Vector2(-46, 82)
 scale = Vector2(1.6, 1.6)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(353, 788)

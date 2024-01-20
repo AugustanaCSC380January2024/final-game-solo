@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfc0t21sbx2pr"]
+
+[ext_resource type="Script" path="res://Scripts/respawner.gd" id="1_slnp6"]
+[ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="2_0apva"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nscf4"]
+atlas = ExtResource("2_0apva")
+region = Rect2(0, 205, 32, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cexh"]
+atlas = ExtResource("2_0apva")
+region = Rect2(64, 205, 32, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwwt6"]
+atlas = ExtResource("2_0apva")
+region = Rect2(96, 205, 32, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pj6uh"]
+atlas = ExtResource("2_0apva")
+region = Rect2(128, 205, 32, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qd32k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nscf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cexh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwwt6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pj6uh")
+}],
+"loop": true,
+"name": &"Respawning",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u15fh"]
+font_size = 32
+
+[node name="Respawner" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_slnp6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(632, 480)
+scale = Vector2(4.75, 4.75)
+sprite_frames = SubResource("SpriteFrames_qd32k")
+animation = &"Respawning"
+autoplay = "Respawning"
+frame_progress = 0.258329
+
+[node name="Respawn Timer" type="Timer" parent="."]
+
+[node name="RespawnLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -75.0
+offset_right = 81.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RESPAWNING IN:
+10"
+label_settings = SubResource("LabelSettings_u15fh")
+horizontal_alignment = 1
+
+[node name="Interval" type="Timer" parent="."]
