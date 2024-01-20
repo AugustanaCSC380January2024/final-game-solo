@@ -3,6 +3,7 @@ extends Control
 @onready var respawn_timer = $"Respawn Timer"
 @onready var respawn_label = $RespawnLabel
 @onready var interval = $Interval
+@onready var respawn_player = $RespawnPlayer
 
 @export var respawn_time = 10
 
@@ -16,6 +17,9 @@ func respawn():
 		await interval.timeout
 	respawn_timer.start()
 	update_label(0)
+	await respawn_timer.timeout
+	respawn_player.play()
+	
 
 func update_label(time):
 	respawn_label.text = "RESPAWNING IN:\n" + str(time)

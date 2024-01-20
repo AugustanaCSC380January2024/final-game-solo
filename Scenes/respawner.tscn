@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfc0t21sbx2pr"]
+[gd_scene load_steps=10 format=3 uid="uid://bfc0t21sbx2pr"]
 
 [ext_resource type="Script" path="res://Scripts/respawner.gd" id="1_slnp6"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="2_0apva"]
+[ext_resource type="AudioStream" uid="uid://2h5s3bqn58nx" path="res://Assets/Sounds/Heal/respawn_sound.wav" id="3_xhhcj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nscf4"]
 atlas = ExtResource("2_0apva")
@@ -57,7 +58,7 @@ scale = Vector2(4.75, 4.75)
 sprite_frames = SubResource("SpriteFrames_qd32k")
 animation = &"Respawning"
 autoplay = "Respawning"
-frame_progress = 0.258329
+frame_progress = 0.368031
 
 [node name="Respawn Timer" type="Timer" parent="."]
 
@@ -80,3 +81,7 @@ label_settings = SubResource("LabelSettings_u15fh")
 horizontal_alignment = 1
 
 [node name="Interval" type="Timer" parent="."]
+
+[node name="RespawnPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xhhcj")
+volume_db = -6.0
