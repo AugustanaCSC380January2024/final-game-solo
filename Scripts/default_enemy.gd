@@ -5,6 +5,7 @@ var alive = true
 var player_in_range = false
 var beacon_in_range = false
 var current_health = 0
+var round
 
 var hurt_sound = preload("res://Music/528816__magnuswaker__sci-fi-bass-blast.wav")
 var dead_sound = preload("res://Music/SPLC-0369_FX_Oneshot_Explosion_Short_Boom.mp3")
@@ -101,10 +102,11 @@ func die():
 		hurt_audio_player.play()
 		await hurt_audio_player.finished
 		var spawner= get_parent()
-		for num in range(0, 3):
-			var battery_instance = battery.instantiate()
-			spawner.add_child(battery_instance)
-			battery_instance.global_position = global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
+		for num in range(0, round*3):
+			if randi() % 2:
+				var battery_instance = battery.instantiate()
+				spawner.add_child(battery_instance)
+				battery_instance.global_position = global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
 		free()
 		#queue_free()
 
