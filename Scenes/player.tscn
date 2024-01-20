@@ -219,4 +219,6 @@ libraries = {
 [node name="ShotPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
 
+[node name="BatteryPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]

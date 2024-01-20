@@ -10,8 +10,10 @@ signal battery_collected
 @onready var health_bar = $UI/HUD/ProgressBar
 @onready var animation_player = $AnimationPlayer
 @onready var shot_player = $ShotPlayer
+@onready var battery_player = $BatteryPlayer
 
 var shoot_sound = preload("res://Music/450768__tycoh__plasmapistol_shot.wav")
+var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
 var animation_playing = false
 
 var energy_orb_container
@@ -24,6 +26,7 @@ func _ready():
 	health_bar.max_value = health
 	health_bar.value = health
 	shot_player.stream = shoot_sound
+	battery_player.stream = battery_sound
 
 func _process(delta):
 	if alive:
@@ -81,4 +84,5 @@ func die():
 func _on_coin_collection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("battery"):
 		battery_collected.emit()
+		battery_player.play()
 		area.queue_free()
