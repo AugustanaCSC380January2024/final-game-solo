@@ -58,7 +58,7 @@ scale = Vector2(4.75, 4.75)
 sprite_frames = SubResource("SpriteFrames_qd32k")
 animation = &"Respawning"
 autoplay = "Respawning"
-frame_progress = 0.368031
+frame_progress = 0.172997
 
 [node name="Respawn Timer" type="Timer" parent="."]
 

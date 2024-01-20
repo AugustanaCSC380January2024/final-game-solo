@@ -18,6 +18,7 @@ signal player_die
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
+var death_sound = preload("res://Assets/Sounds/ESM_Planet_Absorb_Game_FX_1Pick_Up_Robotic_Technology_Hi_Tech_Game_Tone_Science_UFO_Space_Processed_Glitch_Hybrid_Sci_fi.wav")
 
 var hurt_sounds = []
 var hurt_sound_1 = preload("res://Assets/Sounds/Hurt/ESM_ACV_Vocals_male_pain_heavy_damage_painful_injury_02.wav")
@@ -94,6 +95,8 @@ func take_damage(damage):
 
 func die():
 	if alive:
+		hurt_player.stream = death_sound
+		hurt_player.play()
 		print("Dead")
 		alive = false
 		velocity = Vector2.ZERO

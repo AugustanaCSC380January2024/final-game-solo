@@ -9,6 +9,8 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 @onready var round_start_label = $CanvasLayer/RoundStartLabel
 @onready var round_label_timer = $CanvasLayer/RoundStartLabel/RoundLabelTimer
 @onready var press_e_to_start_label = $"CanvasLayer/Press E to start"
+@onready var open_store_label = $CanvasLayer/OpenStoreLabel
+
 @onready var beacon_sprite = $Beacon/AnimatedSprite2D
 @onready var audio_stream_player = $RoundMusicPlayer
 @onready var round_over_player = $RoundOverPlayer
@@ -24,6 +26,7 @@ var scaling_difficulty = 1
 var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false
+var player_in_store_region = false
 
 var batteries = 0
 
@@ -45,8 +48,12 @@ func _process(delta):
 			start_round()
 	else:
 		press_e_to_start_label.visible = false
-	if Input.is_action_just_pressed("temp_start_round"):
-		start_round()
+	if player_in_store_region && !round_ongoing && !open_store_label.visible:
+		open_store_label.visible = true
+		if Input.is_action_just_pressed("interact"):
+			open_shop()
+	else:
+		open_store_label.visible = false
 	if done_spawning:
 		check_for_living_enemies()
 	
@@ -162,3 +169,16 @@ func respawn_player():
 	respawner.visible = false
 	
 	
+
+
+func _on_store_open_area_body_entered(body):
+	if body.is_in_group("player"):
+		player_in_store_region = true
+
+
+func _on_store_open_area_body_exited(body):
+	if body.is_in_group("player"):
+		player_in_store_region = false
+
+func open_shop():
+	pass

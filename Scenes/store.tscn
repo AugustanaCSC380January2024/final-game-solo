@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://hpspf1de1ymv"]
+
+[ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="1_j2xr4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82nu4"]
+atlas = ExtResource("1_j2xr4")
+region = Rect2(352, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igeiv"]
+atlas = ExtResource("1_j2xr4")
+region = Rect2(384, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uwkmf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82nu4")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igeiv")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdgmy"]
+size = Vector2(50, 34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7bkm1"]
+radius = 45.0111
+
+[node name="Store" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 30
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_uwkmf")
+animation = &"closed"
+autoplay = "closed"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 13)
+shape = SubResource("RectangleShape2D_wdgmy")
+
+[node name="StoreOpenArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StoreOpenArea"]
+position = Vector2(-1, 12)
+shape = SubResource("CircleShape2D_7bkm1")
