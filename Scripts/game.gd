@@ -1,6 +1,6 @@
 extends Node2D
 
-var crosshair = preload("res://Assets/crosshair111.png")
+var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 
 @onready var level = $Level/SpawnAreas
 @onready var player = get_node("Player")
@@ -13,7 +13,7 @@ var crosshair = preload("res://Assets/crosshair111.png")
 @onready var audio_stream_player = $RoundMusicPlayer
 @onready var round_over_player = $RoundOverPlayer
 
-
+signal update_battery_display
 
 
 var round = 1
@@ -23,9 +23,12 @@ var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false
 
+var batteries = 0
+
 var spawn_areas = []
 
 func _ready():
+	player.battery_collected.connect(add_battery)
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 	
@@ -114,3 +117,8 @@ func _on_start_round_area_body_entered(body):
 func _on_start_round_area_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_start_region = false
+
+func add_battery():
+	print("battery added")
+	batteries += 1
+	update_battery_display.emit(batteries)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://drmbs3fxcl2db"]
+[gd_scene load_steps=26 format=3 uid="uid://drmbs3fxcl2db"]
 
-[ext_resource type="Texture2D" uid="uid://comtrm3l4gg0s" path="res://Assets/players green x1.png" id="1_30igu"]
+[ext_resource type="Texture2D" uid="uid://comtrm3l4gg0s" path="res://Assets/Sprites/players green x1.png" id="1_30igu"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_d27qr"]
 [ext_resource type="PackedScene" uid="uid://de0xpl6ms7nfv" path="res://Scenes/ui.tscn" id="3_syg6f"]
 
@@ -142,6 +142,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iixah"]
 size = Vector2(12, 16)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm1ec"]
+
 [sub_resource type="Animation" id="Animation_q2jv1"]
 resource_name = "die"
 length = 2.0
@@ -182,7 +184,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 53
+collision_mask = 117
 motion_mode = 1
 script = ExtResource("1_d27qr")
 
@@ -193,6 +195,14 @@ animation = &"die"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_iixah")
+
+[node name="CoinCollection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinCollection"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_wm1ec")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
@@ -208,3 +218,5 @@ libraries = {
 
 [node name="ShotPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -15.0
+
+[connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]

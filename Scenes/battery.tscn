@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsesdyuniinxb"]
+
+[ext_resource type="Script" path="res://Scripts/battery.gd" id="1_dgd0t"]
+[ext_resource type="Texture2D" uid="uid://mue8r6mx6gtt" path="res://Assets/Sprites/items.png" id="1_mee1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqjyn"]
+atlas = ExtResource("1_mee1m")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dv274"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqjyn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3cy1"]
+radius = 4.0
+height = 16.0
+
+[node name="Battery" type="Area2D" groups=["battery"]]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_dgd0t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dv274")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_y3cy1")

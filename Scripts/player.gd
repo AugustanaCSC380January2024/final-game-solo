@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 @export var speed = 100
 
+signal battery_collected
+
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HUD/ProgressBar
 @onready var animation_player = $AnimationPlayer
@@ -73,3 +75,10 @@ func die():
 	animation_player.play("die")
 	await animation_player.animation_finished
 	animated_sprite.visible = false
+
+
+
+func _on_coin_collection_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("battery"):
+		battery_collected.emit()
+		area.queue_free()

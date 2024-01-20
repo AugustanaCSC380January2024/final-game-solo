@@ -1,30 +1,30 @@
 [gd_scene load_steps=11 format=3 uid="uid://ctbv1f1m8infe"]
 
 [ext_resource type="Script" path="res://Scripts/projectile.gd" id="1_rjbcg"]
-[ext_resource type="Texture2D" uid="uid://caovfu7fsygmb" path="res://Assets/Energy Orb.png" id="2_b8kvd"]
+[ext_resource type="Texture2D" uid="uid://caovfu7fsygmb" path="res://Assets/Sprites/Energy Orb.png" id="2_72nad"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvvkp"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pspli"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3e16"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hmhy4"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qmqg"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ysiwx"]
-atlas = ExtResource("2_b8kvd")
+atlas = ExtResource("2_72nad")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y22tk"]

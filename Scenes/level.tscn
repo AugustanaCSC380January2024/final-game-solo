@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b1w8hy0r2u7a4"]
 
-[ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/tileset x1.png" id="1_bqd5i"]
-[ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/props and items x1.png" id="2_ak6rc"]
+[ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/Sprites/tileset x1.png" id="1_bqd5i"]
+[ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="2_ak6rc"]
 [ext_resource type="PackedScene" uid="uid://d2bw8vjnefgs8" path="res://Scenes/spawn_area.tscn" id="2_wdqyd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgrit"]

@@ -1,6 +1,6 @@
 extends Control
 
-var crosshair = load("res://Assets/crosshair111.png")
+var crosshair = load("res://Assets/Sprites/crosshair111.png")
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):

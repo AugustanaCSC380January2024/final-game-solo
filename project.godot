@@ -21,6 +21,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom_font="res://Assets/Fonts/PixeloidSans-Bold.ttf"
+
 [input]
 
 move_up={
@@ -81,6 +85,7 @@ temp_start_round={
 2d_physics/layer_4="friendly_projectiles"
 2d_physics/layer_5="enemy_projectiles"
 2d_physics/layer_6="objects"
+2d_physics/layer_7="Collectables"
 
 [rendering]
 

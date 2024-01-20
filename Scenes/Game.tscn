@@ -1,15 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=8 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="PackedScene" uid="uid://b1w8hy0r2u7a4" path="res://Scenes/level.tscn" id="2_i7anh"]
 [ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_nfu3v"]
 [ext_resource type="PackedScene" uid="uid://b4oyb11633xu" path="res://Scenes/beacon.tscn" id="6_87qat"]
+[ext_resource type="PackedScene" uid="uid://bsesdyuniinxb" path="res://Scenes/battery.tscn" id="6_cbq55"]
 [ext_resource type="PackedScene" uid="uid://b1glgh8v4uhpv" path="res://Scenes/pause_menu.tscn" id="7_3m5yg"]
+[ext_resource type="PackedScene" uid="uid://dtwyrh14vud6i" path="res://Scenes/battery_count.tscn" id="7_lisl0"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wvqwh")
 
 [node name="Level" parent="." instance=ExtResource("2_i7anh")]
+
+[node name="Battery" parent="." instance=ExtResource("6_cbq55")]
+position = Vector2(613, 325)
 
 [node name="Beacon" parent="." instance=ExtResource("6_87qat")]
 position = Vector2(501, 335)
@@ -57,6 +62,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Press \"E\" to start!"
+
+[node name="Battery Count" parent="CanvasLayer" instance=ExtResource("7_lisl0")]
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0

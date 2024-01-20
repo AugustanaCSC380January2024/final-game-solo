@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caovfu7fsygmb"
-path="res://.godot/imported/Energy Orb.png-a49668fde2663a930797f459d7133e6d.ctex"
+uid="uid://db6708pvqge48"
+path="res://.godot/imported/tileset x1.png-db95fc782a08e3d66188f24d85ce5eb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Energy Orb.png"
-dest_files=["res://.godot/imported/Energy Orb.png-a49668fde2663a930797f459d7133e6d.ctex"]
+source_file="res://Assets/Sprites/tileset x1.png"
+dest_files=["res://.godot/imported/tileset x1.png-db95fc782a08e3d66188f24d85ce5eb8.ctex"]
 
 [params]
 
