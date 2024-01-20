@@ -221,6 +221,9 @@ volume_db = -15.0
 
 [node name="BatteryPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="HurtPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+
 [node name="WeaponCooldown" type="Timer" parent="."]
 wait_time = 2.0
 

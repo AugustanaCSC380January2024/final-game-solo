@@ -178,7 +178,7 @@ animations = [{
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mwe37"]
-radius = 74.027
+radius = 95.0
 
 [sub_resource type="Animation" id="Animation_da0je"]
 resource_name = "die"

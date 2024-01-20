@@ -12,9 +12,16 @@ signal battery_collected
 @onready var shot_player = $ShotPlayer
 @onready var battery_player = $BatteryPlayer
 @onready var weapon_cooldown = $WeaponCooldown
+@onready var hurt_player = $HurtPlayer
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
+
+var hurt_sounds = []
+var hurt_sound_1 = preload("res://Assets/Sounds/Hurt/ESM_ACV_Vocals_male_pain_heavy_damage_painful_injury_02.wav")
+var hurt_sound_2 = preload("res://Assets/Sounds/Hurt/ESM_ACV_Vocals_male_pain_medium_injury_tonal_shift_03.wav")
+var hurt_sound_3 = preload("res://Assets/Sounds/Hurt/ESM_High_Elf_Vocal_Pain_Vocal_Ouch_Ahh_Male_Voice.wav")
+var hurt_sound_4 = preload("res://Assets/Sounds/Hurt/ESM_Wizard_Pain_Vocal_Hurt_Uhh_Male_Voice_Old_Man.wav")
 var animation_playing = false
 
 var energy_orb_container
@@ -24,6 +31,10 @@ var cooldown = false
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
 func _ready():
+	hurt_sounds.append(hurt_sound_1)
+	hurt_sounds.append(hurt_sound_2)
+	hurt_sounds.append(hurt_sound_3)
+	hurt_sounds.append(hurt_sound_4)
 	energy_orb_container = get_node("EnergyOrbContainer")
 	health_bar.max_value = health
 	health_bar.value = health
@@ -73,6 +84,8 @@ func shoot():
 func take_damage(damage):
 	health -= damage
 	$UI/HUD/ProgressBar.value = health
+	hurt_player.stream = hurt_sounds.pick_random()
+	hurt_player.play()
 	if health <= 0:
 		die()
 
