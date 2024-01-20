@@ -6,10 +6,12 @@ var player_in_range = false
 var beacon_in_range = false
 var current_health = 0
 
+var hurt_sound = preload("res://Music/528816__magnuswaker__sci-fi-bass-blast.wav")
+
 
 @export var max_speed = 100
 @export var speed = 70
-@export var health = 2
+var health: float
 @export var player: Node2D
 @export var beacon: StaticBody2D
 
@@ -21,6 +23,7 @@ var current_health = 0
 @onready var animation_player = get_node("AnimationPlayer")
 @onready var range = get_node("Range")
 @onready var collision_box = get_node("CollisionShape2D")
+@onready var hurt_audio_player = get_node("HurtSoundPlayer")
 
 var player_detection_distance = 20
 var distance_offset = 64
@@ -30,6 +33,7 @@ func _ready():
 	health_bar.max_value = health
 	set_health_bar()
 	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
+	hurt_audio_player.stream = hurt_sound
 	
 
 func _physics_process(delta: float):
@@ -75,6 +79,7 @@ func update_animations(direction):
 func take_damage(damage):
 	if alive:
 		current_health += damage
+		hurt_audio_player.play()
 		set_health_bar()
 		scale += Vector2(.01, .01)
 		if current_health >= health:
@@ -119,7 +124,8 @@ func shoot(body):
 		animation_player.play("shoot")
 		await animation_player.animation_finished
 
-
+func set_health(new_health):
+	health = new_health
 
 
 

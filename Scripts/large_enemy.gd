@@ -6,7 +6,8 @@ var lazer_ball_big_scene = preload("res://Scenes/Projectiles/lazer_ball_big.tscn
 var base_damage = 4
 
 func _ready():
-	health = 10
+	health = 5
+	super._ready()
 
 func shoot(body):
 	super.shoot(body)
@@ -27,5 +28,4 @@ func _on_weapon_timer_timeout():
 	elif beacon_in_range:
 		shoot(beacon)
 		
-	
 	

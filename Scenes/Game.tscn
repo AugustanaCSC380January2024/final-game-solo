@@ -66,8 +66,10 @@ autostart = true
 [node name="SpawnTimer" type="Timer" parent="."]
 
 [node name="RoundMusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
 
 [node name="RoundOverPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
 
 [connection signal="body_entered" from="Beacon/StartRoundArea" to="." method="_on_start_round_area_body_entered"]
 [connection signal="body_exited" from="Beacon/StartRoundArea" to="." method="_on_start_round_area_body_exited"]

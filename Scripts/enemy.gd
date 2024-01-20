@@ -4,6 +4,10 @@ var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 
 var base_damage = 2
 
+func _ready():
+	health = 2
+	super._ready()
+
 func shoot(body):
 	super.shoot(body)
 	if alive:
@@ -24,4 +28,5 @@ func generate_projectile(body):
 	lazer_ball.direction = -body.global_position.direction_to(global_position)
 	lazer_ball.damage += base_damage + current_health
 	return lazer_ball
+
 

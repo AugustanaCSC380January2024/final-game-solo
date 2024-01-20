@@ -15,9 +15,11 @@ func spawn_enemy(player, beacon, scaling_difficulty):
 	print("enemy spawned")
 	var spawnable_enemy = enemy_array.pick_random().instantiate()
 	spawnable_enemy.scale = Vector2(.6,.6)
-	spawnable_enemy.health = spawnable_enemy.health + .5 * scaling_difficulty
-	spawnable_enemy.base_damage = spawnable_enemy.base_damage + .5 * scaling_difficulty
+	spawnable_enemy.base_damage = spawnable_enemy.base_damage * (1 + .1) ** scaling_difficulty
 	spawnable_enemy.player = player
 	spawnable_enemy.beacon = beacon
 	add_child(spawnable_enemy)
+	spawnable_enemy.health = spawnable_enemy.health * (1 + .2) ** scaling_difficulty
+	print("Health: " + str(spawnable_enemy.health))
+	print("Damage: " + str(spawnable_enemy.base_damage))
 

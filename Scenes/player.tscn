@@ -205,3 +205,6 @@ zoom = Vector2(2.5, 2.5)
 libraries = {
 "": SubResource("AnimationLibrary_sfwka")
 }
+
+[node name="ShotPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0

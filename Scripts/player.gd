@@ -7,7 +7,9 @@ extends CharacterBody2D
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HUD/ProgressBar
 @onready var animation_player = $AnimationPlayer
+@onready var shot_player = $ShotPlayer
 
+var shoot_sound = preload("res://Music/450768__tycoh__plasmapistol_shot.wav")
 var animation_playing = false
 
 var energy_orb_container
@@ -19,6 +21,7 @@ func _ready():
 	energy_orb_container = get_node("EnergyOrbContainer")
 	health_bar.max_value = health
 	health_bar.value = health
+	shot_player.stream = shoot_sound
 
 func _process(delta):
 	if alive:
@@ -50,6 +53,7 @@ func shoot():
 	var energy_orb = energy_orb_scene.instantiate()
 	energy_orb.damage = 1
 	energy_orb.friendly = true
+	shot_player.play()
 	animation_player.play("shoot")
 	energy_orb.global_position = global_position
 	energy_orb.position = position

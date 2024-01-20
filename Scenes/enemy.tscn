@@ -260,6 +260,10 @@ libraries = {
 "": SubResource("AnimationLibrary_cd34t")
 }
 
+[node name="HurtSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
