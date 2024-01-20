@@ -14,7 +14,8 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 @onready var round_over_player = $RoundOverPlayer
 
 signal update_battery_display
-
+signal update_beacon_health_bar_max
+signal update_beacon_health_bar
 
 var round = 1
 var first_round_enemy_count = 4
@@ -28,7 +29,9 @@ var batteries = 0
 var spawn_areas = []
 
 func _ready():
+	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
+	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 	
@@ -122,3 +125,17 @@ func add_battery():
 	print("battery added")
 	batteries += 1
 	update_battery_display.emit(batteries)
+
+func beacon_take_damage():
+	update_beacon_health()
+	if beacon.current_health >= beacon.max_health:
+		game_over()
+
+func update_beacon_max_label():
+	update_beacon_health_bar_max.emit(beacon.max_health)
+
+func update_beacon_health():
+	update_beacon_health_bar.emit(beacon.current_health)
+	
+func game_over():
+	print("Game Over")
