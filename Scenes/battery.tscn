@@ -19,8 +19,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y3cy1"]
-radius = 4.0
-height = 16.0
+radius = 2.0
+height = 8.0
 
 [node name="Battery" type="Area2D" groups=["battery"]]
 collision_layer = 64
@@ -28,6 +28,7 @@ collision_mask = 2
 script = ExtResource("1_dgd0t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_dv274")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
