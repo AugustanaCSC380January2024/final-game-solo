@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var health = 10
+@export var health = 20
 
 @export var speed = 100
 
@@ -11,13 +11,15 @@ signal battery_collected
 @onready var animation_player = $AnimationPlayer
 @onready var shot_player = $ShotPlayer
 @onready var battery_player = $BatteryPlayer
+@onready var weapon_cooldown = $WeaponCooldown
 
-var shoot_sound = preload("res://Music/450768__tycoh__plasmapistol_shot.wav")
+var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
 var animation_playing = false
 
 var energy_orb_container
 var alive = true
+var cooldown = false
 
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
@@ -55,15 +57,18 @@ func update_animations(direction):
 		animated_sprite.play("walking")
 		
 func shoot():
-	var energy_orb = energy_orb_scene.instantiate()
-	energy_orb.damage = 1
-	energy_orb.friendly = true
-	shot_player.play()
-	animation_player.play("shoot")
-	energy_orb.global_position = global_position
-	energy_orb.position = position
-	energy_orb.direction = -get_global_mouse_position().direction_to(position)
-	energy_orb_container.add_child(energy_orb)
+	if !cooldown:
+		cooldown = true
+		weapon_cooldown.start()
+		var energy_orb = energy_orb_scene.instantiate()
+		energy_orb.damage = 1
+		energy_orb.friendly = true
+		shot_player.play()
+		animation_player.play("shoot")
+		energy_orb.global_position = global_position
+		energy_orb.position = position
+		energy_orb.direction = -get_global_mouse_position().direction_to(position)
+		energy_orb_container.add_child(energy_orb)
 
 func take_damage(damage):
 	health -= damage
@@ -86,3 +91,7 @@ func _on_coin_collection_area_shape_entered(area_rid, area, area_shape_index, lo
 		battery_collected.emit()
 		battery_player.play()
 		area.queue_free()
+
+
+func _on_weapon_cooldown_timeout():
+	cooldown = false

@@ -221,4 +221,8 @@ volume_db = -15.0
 
 [node name="BatteryPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="WeaponCooldown" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]
+[connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]
