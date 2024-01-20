@@ -5,6 +5,7 @@ var lazer_ball_scene = preload("res://Scenes/Projectiles/lazer_ball.tscn")
 var base_damage = 2
 
 func _ready():
+	shoot_sound_player.stream = preload("res://Music/ESM_FVESK_fx_foley_repair_work_shop_laser_ufo_high_energy_beams_neon_high_2.wav")
 	health = 2
 	super._ready()
 
@@ -13,6 +14,7 @@ func shoot(body):
 	if alive:
 		var projectile = generate_projectile(body)
 		projectile_container.add_child(projectile)
+		shoot_sound_player.play()
 
 
 func _on_weapon_timer_timeout():

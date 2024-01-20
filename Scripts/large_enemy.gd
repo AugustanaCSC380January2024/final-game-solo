@@ -7,6 +7,7 @@ var base_damage = 4
 
 func _ready():
 	health = 5
+	shoot_sound_player.stream = preload("res://Music/ESM_GW_designed_shotgun_hi_tech_charge_boom_heavy_beefy_energy_shot_tech_1.wav")
 	super._ready()
 
 func shoot(body):
@@ -14,6 +15,7 @@ func shoot(body):
 	if alive:
 		var projectile = generate_projectile(body)
 		projectile_container.add_child(projectile)
+		shoot_sound_player.play()
 	
 func generate_projectile(body):
 	var lazer_ball_big = lazer_ball_big_scene.instantiate()

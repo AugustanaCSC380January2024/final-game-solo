@@ -12,7 +12,7 @@ script = ExtResource("1_wvqwh")
 [node name="Level" parent="." instance=ExtResource("2_i7anh")]
 
 [node name="Beacon" parent="." instance=ExtResource("6_87qat")]
-position = Vector2(577, 386)
+position = Vector2(501, 335)
 
 [node name="Player" parent="." instance=ExtResource("2_nfu3v")]
 position = Vector2(573, 429)

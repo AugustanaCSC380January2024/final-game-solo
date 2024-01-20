@@ -7,6 +7,7 @@ var beacon_in_range = false
 var current_health = 0
 
 var hurt_sound = preload("res://Music/528816__magnuswaker__sci-fi-bass-blast.wav")
+var dead_sound = preload("res://Music/SPLC-0369_FX_Oneshot_Explosion_Short_Boom.mp3")
 
 
 @export var max_speed = 100
@@ -24,6 +25,8 @@ var health: float
 @onready var range = get_node("Range")
 @onready var collision_box = get_node("CollisionShape2D")
 @onready var hurt_audio_player = get_node("HurtSoundPlayer")
+@onready var shoot_sound_player = $ShootSoundPlayer
+
 
 var player_detection_distance = 20
 var distance_offset = 64
@@ -93,6 +96,9 @@ func die():
 		health_bar.visible = false
 		animation_player.play("die")
 		await animation_player.animation_finished
+		hurt_audio_player.stream = dead_sound
+		hurt_audio_player.play()
+		await hurt_audio_player.finished
 		free()
 		#queue_free()
 
