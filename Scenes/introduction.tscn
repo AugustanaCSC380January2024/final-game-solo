@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://cspwcnb5tsy1s"]
+
+[ext_resource type="Script" path="res://Scripts/introduction.gd" id="1_k0m6y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5fe2l"]
+font_size = 48
+
+[node name="Introduction" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k0m6y")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.235294, 0.341176, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -218.0
+offset_top = 22.0
+offset_right = 218.0
+offset_bottom = 81.0
+grow_horizontal = 2
+text = "INTRODUCTION"
+label_settings = SubResource("LabelSettings_5fe2l")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.0
+offset_top = -255.0
+offset_right = 514.0
+offset_bottom = 255.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 19
+text = "	As one of the last survivors on earth, your only hope of survival is to protecti yourself within your facility. In order to survive nights, the central computer in the main room must be turned on. However, be warned – simply running your facility draws the attention of restless waves of AI enemies.
+
+	Strategize and manage your resources wisely as you face increasingly challenging waves of AI attackers. The key to survival lies in upgrading your defenses, and fortunately, you can access the store room at the top right of the facility to purchase powerful upgrades for your defenses and technologies. The only way to destroy an enemy is to overload its capacitors. However, fight with caution! The more energy the AI stores, the stronger they become! 
+
+	Are you ready to outsmart the relentless AI forces, enhance your facility's defenses, and emerge as the ultimate survivor in this intense battle for survival? The fate of humanity rests in your hands – adapt, upgrade, and stand strong against the AI onslaught!"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = 140.0
+offset_right = 123.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

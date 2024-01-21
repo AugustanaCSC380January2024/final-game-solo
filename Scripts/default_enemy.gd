@@ -102,7 +102,7 @@ func die():
 		hurt_audio_player.play()
 		await hurt_audio_player.finished
 		var spawner= get_parent()
-		for num in range(0, round*5):
+		for num in range(0, round*10):
 			if randi() % 2:
 				var battery_instance = battery.instantiate()
 				spawner.add_child(battery_instance)
@@ -111,6 +111,7 @@ func die():
 		#queue_free()
 
 func set_health_bar():
+	health_bar.max_value = health
 	health_bar.value = current_health
 
 func _on_range_body_entered(body):

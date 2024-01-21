@@ -36,7 +36,7 @@ var animation_playing = false
 var energy_orb_container
 var alive = true
 var cooldown = false
-var can_shoot = true
+var can_shoot: bool = true
 
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://db5lq5ps2x3a7"]
+[gd_scene load_steps=15 format=3 uid="uid://db5lq5ps2x3a7"]
 
 [ext_resource type="Script" path="res://Scripts/store_ui.gd" id="1_iqgqi"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="1_wb4xa"]
@@ -56,6 +56,9 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ey843"]
+font_size = 24
 
 [node name="StoreUI" type="Control"]
 layout_mode = 3
@@ -197,6 +200,86 @@ text = "50"
 position = Vector2(909, 571)
 scale = Vector2(3.25, 3.25)
 sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -152.0
+offset_right = -161.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Damage"
+label_settings = SubResource("LabelSettings_ey843")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -152.0
+offset_right = 63.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bullet Speed"
+label_settings = SubResource("LabelSettings_ey843")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -152.0
+offset_right = 280.0
+offset_bottom = -122.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fire Rate"
+label_settings = SubResource("LabelSettings_ey843")
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -288.0
+offset_top = 64.0
+offset_right = -144.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+ 10% Health"
+label_settings = SubResource("LabelSettings_ey843")
+
+[node name="Label6" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 120.0
+offset_top = 64.0
+offset_right = 309.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "- 10% Beacon"
+label_settings = SubResource("LabelSettings_ey843")
 
 [connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="DamageButton" to="." method="_on_damage_button_pressed"]

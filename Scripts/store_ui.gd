@@ -39,6 +39,7 @@ func _on_heal_player_button_pressed():
 	get_batteries()
 	if batteries >= int(heal_player_button.text):
 		spend(int(heal_player_button.text))
+		player.max_health = player.max_health + player.max_health / 10.0
 		player.health += player.max_health / 10.0
 
 

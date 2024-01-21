@@ -1,6 +1,7 @@
 extends Node2D
 
 var crosshair = preload("res://Assets/Sprites/crosshair111.png")
+var game_over_sound = preload("res://Assets/Sounds/BOS_DBN_145_FX_Impact_Loop_Profit_F.wav")
 
 @onready var level = $Level/SpawnAreas
 @onready var player = get_node("Player")
@@ -10,6 +11,7 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 @onready var round_label_timer = $CanvasLayer/RoundStartLabel/RoundLabelTimer
 @onready var press_e_to_start_label = $"CanvasLayer/Press E to start"
 @onready var open_store_label = $CanvasLayer/OpenStoreLabel
+@onready var ambient_music_player = $AmbientMusicPlayer
 
 @onready var beacon_sprite = $Beacon/AnimatedSprite2D
 @onready var audio_stream_player = $RoundMusicPlayer
@@ -34,6 +36,7 @@ var batteries = 0
 var spawn_areas = []
 
 func _ready():
+	player.can_shoot = false
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
 	player.player_die.connect(respawn_player)
@@ -41,6 +44,7 @@ func _ready():
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
+	set_batteries(10000)
 	
 
 func _process(delta):
@@ -59,6 +63,9 @@ func _process(delta):
 		open_store_label.visible = false
 	if done_spawning:
 		check_for_living_enemies()
+	if $CanvasLayer/Introduction.visible:
+		Input.set_custom_mouse_cursor(null)
+		
 	
 
 func get_spawn_areas():
@@ -97,9 +104,11 @@ func round_complete():
 	await round_label_timer.timeout
 	round_start_label.visible = false
 	print("Round Complete")
+	ambient_music_player.play()
 
 func start_round():
 	if !round_ongoing:
+		ambient_music_player.stop()
 		audio_stream_player.stream = load("res://Music/Automation (Synthwave).wav")
 		audio_stream_player.play()
 		round_ongoing = true
@@ -155,7 +164,17 @@ func update_beacon_health():
 	update_beacon_health_bar.emit(beacon.current_health)
 	
 func game_over():
-	print("Game Over")
+	var explosion_scene = load("res://Scenes/explosion.tscn")
+	var explosion = explosion_scene.instantiate()
+	var player_cam = $Player/Camera2D
+	player_cam.global_position = beacon.global_position
+	audio_stream_player.stop()
+	ambient_music_player.stream = game_over_sound
+	ambient_music_player.play()
+	await get_tree().create_timer(1.65).timeout
+	beacon.add_child(explosion)
+	await get_tree().create_timer(4).timeout
+	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 func respawn_player():
 	var respawn_timer = $"CanvasLayer/Respawner/Respawn Timer"
@@ -197,3 +216,13 @@ func _on_store_open_area_body_exited(body):
 func open_shop():
 	store_ui.visible = true
 	player.can_shoot = false
+
+
+func _on_introduction_visibility_changed():
+	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
+	
+
+
+func _on_introduction_hidden():
+	player.can_shoot = true
+	ambient_music_player.play()
