@@ -36,6 +36,7 @@ var animation_playing = false
 var energy_orb_container
 var alive = true
 var cooldown = false
+var can_shoot = true
 
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
@@ -80,7 +81,7 @@ func update_animations(direction):
 		animated_sprite.play("walking")
 		
 func shoot():
-	if !cooldown:
+	if !cooldown && can_shoot:
 		cooldown = true
 		weapon_cooldown.start()
 		cooldown_progress.visible = true

@@ -61,6 +61,7 @@ autoplay = "Respawning"
 frame_progress = 0.172997
 
 [node name="Respawn Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="RespawnLabel" type="Label" parent="."]
 layout_mode = 1

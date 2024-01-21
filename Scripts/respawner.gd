@@ -16,6 +16,7 @@ func respawn():
 		interval.start()
 		await interval.timeout
 	respawn_timer.start()
+	print("Started Respawn Timer")
 	update_label(0)
 	await respawn_timer.timeout
 	respawn_player.play()

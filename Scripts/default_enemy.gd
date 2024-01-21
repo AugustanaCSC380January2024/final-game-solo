@@ -102,7 +102,7 @@ func die():
 		hurt_audio_player.play()
 		await hurt_audio_player.finished
 		var spawner= get_parent()
-		for num in range(0, round*3):
+		for num in range(0, round*5):
 			if randi() % 2:
 				var battery_instance = battery.instantiate()
 				spawner.add_child(battery_instance)

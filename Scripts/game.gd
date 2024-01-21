@@ -40,7 +40,6 @@ func _ready():
 	store_ui.spent_batteries.connect(set_batteries)
 	update_beacon_max_label()
 	get_spawn_areas()
-	set_batteries(1000)
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 	
 
@@ -183,6 +182,8 @@ func respawn_player():
 func _on_store_open_area_body_entered(body):
 	if body.is_in_group("player"):
 		player_in_store_region = true
+		if !round_ongoing:
+			$Store/AnimatedSprite2D.play("open")
 
 
 func _on_store_open_area_body_exited(body):
@@ -190,6 +191,9 @@ func _on_store_open_area_body_exited(body):
 		player_in_store_region = false
 		store_ui.visible = false
 		Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
+		player.can_shoot = true
+		$Store/AnimatedSprite2D.play("closed")
 
 func open_shop():
 	store_ui.visible = true
+	player.can_shoot = false

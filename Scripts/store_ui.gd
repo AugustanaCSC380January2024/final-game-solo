@@ -39,7 +39,6 @@ func _on_heal_player_button_pressed():
 	get_batteries()
 	if batteries >= int(heal_player_button.text):
 		spend(int(heal_player_button.text))
-		heal_player_button.text = str(int(heal_player_button.text) + 5)
 		player.health += player.max_health / 10.0
 
 
@@ -47,7 +46,6 @@ func _on_heal_beacon_button_pressed():
 	get_batteries()
 	if batteries >= int(heal_beacon_button.text):
 		spend(int(heal_beacon_button.text))
-		heal_beacon_button.text = str(int(heal_beacon_button.text) + 5)
 		beacon.current_health -= beacon.max_health / 10.0
 		if beacon.current_health < 0:
 			beacon.current_health = 0
