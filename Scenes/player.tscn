@@ -227,5 +227,13 @@ volume_db = -6.0
 [node name="WeaponCooldown" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="CooldownProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = -12.0
+offset_top = 19.0
+offset_right = 12.0
+offset_bottom = 23.0
+show_percentage = false
+
 [connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]
 [connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]

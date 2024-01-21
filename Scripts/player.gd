@@ -20,6 +20,7 @@ signal player_die
 @onready var battery_player = $BatteryPlayer
 @onready var weapon_cooldown = $WeaponCooldown
 @onready var hurt_player = $HurtPlayer
+@onready var cooldown_progress = $CooldownProgress
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
@@ -49,11 +50,13 @@ func _ready():
 	health_bar.value = health
 	shot_player.stream = shoot_sound
 	battery_player.stream = battery_sound
+	cooldown_progress.max_value = weapon_cooldown.wait_time
 
 func _process(delta):
 	if alive:
 		if Input.is_action_just_pressed("shoot"):
 			shoot()
+	cooldown_progress.value = weapon_cooldown.time_left
 
 func _physics_process(delta):
 	if alive:
@@ -80,6 +83,7 @@ func shoot():
 	if !cooldown:
 		cooldown = true
 		weapon_cooldown.start()
+		cooldown_progress.visible = true
 		var energy_orb = energy_orb_scene.instantiate()
 		energy_orb.damage = bullet_damage
 		energy_orb.speed = bullet_speed
@@ -123,6 +127,7 @@ func _on_coin_collection_area_shape_entered(area_rid, area, area_shape_index, lo
 
 func _on_weapon_cooldown_timeout():
 	cooldown = false
+	cooldown_progress.visible = false
 
 func upgrade_damage():
 	bullet_damage += bullet_damage - bullet_damage/2.0
@@ -131,6 +136,7 @@ func upgrade_damage():
 func upgrade_weapon_cooldown():
 	if weapon_cooldown.wait_time > 0:
 		weapon_cooldown.wait_time -= .1
+		cooldown_progress.max_value = weapon_cooldown.wait_time
 
 func upgrade_bullet_speed():
 	bullet_speed += 10
