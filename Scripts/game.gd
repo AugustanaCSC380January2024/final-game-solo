@@ -18,6 +18,7 @@ var game_over_sound = preload("res://Assets/Sounds/BOS_DBN_145_FX_Impact_Loop_Pr
 @onready var round_over_player = $RoundOverPlayer
 @onready var respawner = $CanvasLayer/Respawner
 @onready var store_ui = $CanvasLayer/StoreUI
+@onready var win_screen = $CanvasLayer/WinScreen
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -44,7 +45,7 @@ func _ready():
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
-	set_batteries(10000)
+	set_batteries(10)
 	
 
 func _process(delta):
@@ -105,6 +106,8 @@ func round_complete():
 	round_start_label.visible = false
 	print("Round Complete")
 	ambient_music_player.play()
+	if round == 11:
+		win_screen.visible = true
 
 func start_round():
 	if !round_ongoing:

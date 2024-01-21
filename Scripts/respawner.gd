@@ -5,12 +5,12 @@ extends Control
 @onready var interval = $Interval
 @onready var respawn_player = $RespawnPlayer
 
-@export var respawn_time = 10
+var respawn_time = 5
 
 signal respawned
 
 func respawn():
-	for time in range(10,0,-1):
+	for time in range(respawn_time,0,-1):
 		print(str(time))
 		update_label(time)
 		interval.start()
