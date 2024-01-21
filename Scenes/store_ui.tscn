@@ -1,9 +1,61 @@
-[gd_scene load_steps=2 format=3 uid="uid://db5lq5ps2x3a7"]
+[gd_scene load_steps=14 format=3 uid="uid://db5lq5ps2x3a7"]
+
+[ext_resource type="Script" path="res://Scripts/store_ui.gd" id="1_iqgqi"]
+[ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="1_wb4xa"]
+[ext_resource type="Texture2D" uid="uid://ctgqv4rbwpmci" path="res://Assets/Upgrades/speed.png" id="2_mbr88"]
+[ext_resource type="Texture2D" uid="uid://diq5uhljeblb7" path="res://Assets/Upgrades/clock.png" id="3_38qir"]
+[ext_resource type="Texture2D" uid="uid://bvrf1xrwxlm3b" path="res://Assets/Upgrades/sword.png" id="4_whkfa"]
+[ext_resource type="Texture2D" uid="uid://mue8r6mx6gtt" path="res://Assets/Sprites/items.png" id="6_hucjc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_flt3w"]
 font_size = 56
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81bc2"]
+atlas = ExtResource("1_wb4xa")
+region = Rect2(192, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4c33p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81bc2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd2iv"]
+atlas = ExtResource("1_wb4xa")
+region = Rect2(224, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wjd4o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd2iv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j07yd"]
+atlas = ExtResource("6_hucjc")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uqbhv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j07yd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="StoreUI" type="Control"]
 layout_mode = 3
@@ -12,6 +64,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_iqgqi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -26,7 +79,19 @@ offset_right = 386.0
 offset_bottom = 291.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 1, 0, 0.129412)
+color = Color(0, 0.317647, 0, 0.882353)
+
+[node name="Close" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -328.0
+offset_top = 80.0
+offset_right = -264.0
+offset_bottom = 108.0
+grow_horizontal = 0
+text = "Close"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -41,3 +106,100 @@ grow_horizontal = 2
 text = "UPGRADES"
 label_settings = SubResource("LabelSettings_flt3w")
 horizontal_alignment = 1
+
+[node name="RegenHealthSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(424, 504)
+scale = Vector2(6.5, 6.5)
+sprite_frames = SubResource("SpriteFrames_4c33p")
+
+[node name="RegenBeaconSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(856, 504)
+scale = Vector2(6.5, 6.5)
+sprite_frames = SubResource("SpriteFrames_wjd4o")
+
+[node name="BulletSpeed" type="Sprite2D" parent="."]
+position = Vector2(640, 286)
+scale = Vector2(3, 3)
+texture = ExtResource("2_mbr88")
+
+[node name="FireRate" type="Sprite2D" parent="."]
+position = Vector2(848, 286)
+scale = Vector2(3, 3)
+texture = ExtResource("3_38qir")
+
+[node name="Damage" type="Sprite2D" parent="."]
+position = Vector2(432, 286)
+scale = Vector2(3, 3)
+texture = ExtResource("4_whkfa")
+
+[node name="DamageButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 336.0
+offset_right = 448.0
+offset_bottom = 392.0
+text = "5"
+
+[node name="Battery Icon" type="AnimatedSprite2D" parent="."]
+position = Vector2(469, 363)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="BulletSpeedButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 336.0
+offset_right = 672.0
+offset_bottom = 392.0
+text = "5"
+
+[node name="Battery Icon2" type="AnimatedSprite2D" parent="."]
+position = Vector2(693, 363)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="FireRateButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 336.0
+offset_right = 880.0
+offset_bottom = 392.0
+text = "5"
+
+[node name="Battery Icon3" type="AnimatedSprite2D" parent="."]
+position = Vector2(901, 363)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="HealPlayerButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 544.0
+offset_right = 456.0
+offset_bottom = 600.0
+text = "5"
+
+[node name="Battery Icon4" type="AnimatedSprite2D" parent="."]
+position = Vector2(477, 571)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="HealBeaconButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 544.0
+offset_right = 888.0
+offset_bottom = 600.0
+text = "5"
+
+[node name="Battery Icon5" type="AnimatedSprite2D" parent="."]
+position = Vector2(909, 571)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="DamageButton" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="BulletSpeedButton" to="." method="_on_bullet_speed_button_pressed"]
+[connection signal="pressed" from="FireRateButton" to="." method="_on_fire_rate_button_pressed"]
+[connection signal="pressed" from="HealPlayerButton" to="." method="_on_heal_player_button_pressed"]
+[connection signal="pressed" from="HealBeaconButton" to="." method="_on_heal_beacon_button_pressed"]

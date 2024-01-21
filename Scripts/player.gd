@@ -5,6 +5,11 @@ extends CharacterBody2D
 
 @export var speed = 100
 
+var bullet_damage: float = 1.0
+var bullet_speed: float = 150
+var fire_rate: float = 2.0
+var bullet_size:float = 1
+
 signal battery_collected
 signal player_die
 
@@ -76,7 +81,9 @@ func shoot():
 		cooldown = true
 		weapon_cooldown.start()
 		var energy_orb = energy_orb_scene.instantiate()
-		energy_orb.damage = 1
+		energy_orb.damage = bullet_damage
+		energy_orb.speed = bullet_speed
+		energy_orb.scale = Vector2(bullet_size,bullet_size)
 		energy_orb.friendly = true
 		shot_player.play()
 		animation_player.play("shoot")
@@ -116,3 +123,14 @@ func _on_coin_collection_area_shape_entered(area_rid, area, area_shape_index, lo
 
 func _on_weapon_cooldown_timeout():
 	cooldown = false
+
+func upgrade_damage():
+	bullet_damage += bullet_damage - bullet_damage/2.0
+	bullet_size += .1
+
+func upgrade_weapon_cooldown():
+	if weapon_cooldown.wait_time > 0:
+		weapon_cooldown.wait_time -= .1
+
+func upgrade_bullet_speed():
+	bullet_speed += 10

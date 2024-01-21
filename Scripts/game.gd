@@ -15,6 +15,7 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 @onready var audio_stream_player = $RoundMusicPlayer
 @onready var round_over_player = $RoundOverPlayer
 @onready var respawner = $CanvasLayer/Respawner
+@onready var store_ui = $CanvasLayer/StoreUI
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -36,8 +37,10 @@ func _ready():
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
 	player.player_die.connect(respawn_player)
+	store_ui.spent_batteries.connect(set_batteries)
 	update_beacon_max_label()
 	get_spawn_areas()
+	set_batteries(1000)
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 	
 
@@ -48,10 +51,11 @@ func _process(delta):
 			start_round()
 	else:
 		press_e_to_start_label.visible = false
-	if player_in_store_region && !round_ongoing && !open_store_label.visible:
+	if player_in_store_region && !round_ongoing && !store_ui.visible:
 		open_store_label.visible = true
 		if Input.is_action_just_pressed("interact"):
 			open_shop()
+			Input.set_custom_mouse_cursor(null)
 	else:
 		open_store_label.visible = false
 	if done_spawning:
@@ -135,6 +139,11 @@ func add_battery():
 	batteries += 1
 	update_battery_display.emit(batteries)
 
+func set_batteries(num:int):
+	batteries = num
+	update_battery_display.emit(batteries)
+	print("set_batteries run")
+
 func beacon_take_damage():
 	update_beacon_health()
 	if beacon.current_health >= beacon.max_health:
@@ -179,6 +188,8 @@ func _on_store_open_area_body_entered(body):
 func _on_store_open_area_body_exited(body):
 	if body.is_in_group("player"):
 		player_in_store_region = false
+		store_ui.visible = false
+		Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
 
 func open_shop():
-	pass
+	store_ui.visible = true
