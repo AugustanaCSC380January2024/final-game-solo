@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dls7fao8g2jch" path="res://Scenes/win_screen.tscn" id="10_rjgmj"]
 [ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
 [ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
-[ext_resource type="PackedScene" uid="uid://d3sp42xxap5qp" path="res://onscreen_controls.tscn" id="14_q6r3q"]
+[ext_resource type="PackedScene" uid="uid://c24466ica1354" path="res://Scenes/green_wave_shader.tscn" id="14_1wvr0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s2p76"]
 font_size = 32
@@ -23,6 +23,11 @@ font_size = 32
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wvqwh")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="GreenWaveShader" parent="CanvasLayer2" instance=ExtResource("14_1wvr0")]
+color = Color(0, 0, 0, 0)
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -100
@@ -46,8 +51,6 @@ position = Vector2(501, 335)
 
 [node name="Player" parent="." instance=ExtResource("2_nfu3v")]
 position = Vector2(573, 429)
-
-[node name="OnScreenControls" parent="." instance=ExtResource("14_q6r3q")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -120,6 +123,9 @@ visible = false
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_3m5yg")]
 visible = false
 
+[node name="PlayerCam" type="Camera2D" parent="."]
+use_parent_material = true
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
@@ -136,8 +142,6 @@ volume_db = -6.0
 [node name="AmbientMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_q4q2j")
 volume_db = -6.0
-
-[node name="PlayerCam" type="Camera2D" parent="."]
 
 [connection signal="body_entered" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_entered"]
 [connection signal="body_exited" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_exited"]

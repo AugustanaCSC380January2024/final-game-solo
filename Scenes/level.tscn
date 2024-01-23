@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1w8hy0r2u7a4"]
+[gd_scene load_steps=9 format=3 uid="uid://b1w8hy0r2u7a4"]
 
 [ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/Sprites/tileset x1.png" id="1_bqd5i"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="2_ak6rc"]
 [ext_resource type="PackedScene" uid="uid://d2bw8vjnefgs8" path="res://Scenes/spawn_area.tscn" id="2_wdqyd"]
+[ext_resource type="Texture2D" uid="uid://l514oyj77esg" path="res://Assets/light_circle.png" id="4_7mscr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgrit"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -4896,3 +4897,13 @@ position = Vector2(353, 788)
 
 [node name="PlayerSpawn_2" type="Marker2D" parent="."]
 position = Vector2(386, 788)
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(498, 342)
+texture = ExtResource("4_7mscr")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(661, 67)
+texture = ExtResource("4_7mscr")

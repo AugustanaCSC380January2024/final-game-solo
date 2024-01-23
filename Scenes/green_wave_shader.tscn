@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c24466ica1354"]
+
+[ext_resource type="Shader" path="res://Shaders/CRT.gdshader" id="1_y1t7e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq5wy"]
+shader = ExtResource("1_y1t7e")
+
+[node name="GreenWaveShader" type="ColorRect"]
+material = SubResource("ShaderMaterial_qq5wy")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

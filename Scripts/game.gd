@@ -22,6 +22,7 @@ var player_scene = preload("res://Scenes/player.tscn")
 @onready var win_screen = $CanvasLayer/WinScreen
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var player_cam = $PlayerCam
+@onready var lights = $Level/Lights
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -38,8 +39,11 @@ var player_in_store_region = false
 var batteries = 0
 
 var spawn_areas = []
+var lights_array = []
+
 var two_players = false
 var both_dead = false
+
 
 func _ready():
 	player.can_shoot = false
@@ -100,6 +104,8 @@ func _on_timer_timeout():
 	pass
 
 func round_complete():
+	for light in lights.get_children():
+			light.visible = true
 	round_over_player.stream = load("res://Music/short-round-110940.mp3")
 	round_over_player.play()
 	audio_stream_player.stop()
@@ -120,6 +126,8 @@ func round_complete():
 
 func start_round():
 	if !round_ongoing:
+		for light in lights.get_children():
+			light.visible = false
 		ambient_music_player.stop()
 		audio_stream_player.stream = load("res://Music/Automation (Synthwave).wav")
 		audio_stream_player.play()
@@ -178,7 +186,6 @@ func update_beacon_health():
 func game_over():
 	var explosion_scene = load("res://Scenes/explosion.tscn")
 	var explosion = explosion_scene.instantiate()
-	var player_cam = $Player/Camera2D
 	player_cam.global_position = beacon.global_position
 	audio_stream_player.stop()
 	ambient_music_player.stream = game_over_sound
@@ -262,8 +269,9 @@ func update_player_cam():
 		else:
 			player_cam.global_position = (player.global_position + player2.global_position) * .5
 			var distance = player.global_position.distance_to(player2.global_position)
-			var desired_zoom = distance /1000
-			var zoom_factor = max(min_zoom,max_zoom,desired_zoom)
+			#var desired_zoom = abs(distance /200)
+			var zoom_factor = clamp(max_zoom-abs(distance /500), min_zoom, max_zoom)
+			#print(zoom_factor)
 			player_cam.zoom = Vector2(zoom_factor, zoom_factor)
 	else:
 		if !player.alive:
