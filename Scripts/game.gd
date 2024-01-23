@@ -2,6 +2,7 @@ extends Node2D
 
 var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 var game_over_sound = preload("res://Assets/Sounds/BOS_DBN_145_FX_Impact_Loop_Profit_F.wav")
+var player_scene = preload("res://Scenes/player.tscn")
 
 @onready var level = $Level/SpawnAreas
 @onready var player = get_node("Player")
@@ -19,6 +20,8 @@ var game_over_sound = preload("res://Assets/Sounds/BOS_DBN_145_FX_Impact_Loop_Pr
 @onready var respawner = $CanvasLayer/Respawner
 @onready var store_ui = $CanvasLayer/StoreUI
 @onready var win_screen = $CanvasLayer/WinScreen
+@onready var pause_menu = $CanvasLayer/PauseMenu
+@onready var player_cam = $PlayerCam
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -35,20 +38,23 @@ var player_in_store_region = false
 var batteries = 0
 
 var spawn_areas = []
+var two_players = false
 
 func _ready():
 	player.can_shoot = false
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
 	player.player_die.connect(respawn_player)
+	pause_menu.add_player_2.connect(start_coop)
 	store_ui.spent_batteries.connect(set_batteries)
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
-	set_batteries(10)
+	set_batteries(1000)
 	
 
 func _process(delta):
+	update_player_cam()
 	if player_in_start_region && !round_ongoing && !round_start_label.visible:
 		press_e_to_start_label.visible = true
 		if Input.is_action_just_pressed("interact"):
@@ -67,6 +73,7 @@ func _process(delta):
 		check_for_living_enemies()
 	if $CanvasLayer/Introduction.visible:
 		Input.set_custom_mouse_cursor(null)
+		
 	
 	
 
@@ -230,3 +237,26 @@ func _on_introduction_visibility_changed():
 func _on_introduction_hidden():
 	player.can_shoot = true
 	ambient_music_player.play()
+
+func start_coop():
+	two_players = true
+	var player2 = player_scene.instantiate()
+	player2.player_id = 2
+	player2.name = "Player2"
+	add_child(player2)
+	player2.global_position = beacon.global_position + Vector2(0, 20)
+	
+func update_player_cam():
+	if two_players:
+		var min_zoom = .5
+		var max_zoom = 2.5
+		var player2 = get_node("Player2")
+		player_cam.global_position = (player.global_position + player2.global_position) * .5
+		var distance = player.global_position.distance_to(player2.global_position)
+		var desired_zoom = distance /1000
+		var zoom_factor = max(min_zoom,max_zoom,desired_zoom)
+		player_cam.zoom = Vector2(zoom_factor, zoom_factor)
+	else:
+		player_cam.global_position = player.global_position
+		player_cam.zoom = Vector2(2.5,2.5)
+	

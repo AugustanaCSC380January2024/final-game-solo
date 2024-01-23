@@ -2,8 +2,9 @@ extends Control
 
 var crosshair = load("res://Assets/Sprites/crosshair111.png")
 @onready var resume = $Resume
+@onready var add_player_2_button = $AddPlayer2
 
-
+signal add_player_2
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
@@ -33,3 +34,9 @@ func _on_main_menu_pressed():
 	change_pause_state()
 	Input.set_custom_mouse_cursor(null)
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+
+
+func _on_add_player_2_pressed():
+	add_player_2.emit()
+	add_player_2_button.queue_free()
+	change_pause_state()

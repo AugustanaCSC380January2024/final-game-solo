@@ -116,6 +116,7 @@ func set_health_bar():
 
 func _on_range_body_entered(body):
 	if body.is_in_group("player"):
+		player = body
 		print("player entered")
 		player_in_range = true
 		weapon_timer.start()

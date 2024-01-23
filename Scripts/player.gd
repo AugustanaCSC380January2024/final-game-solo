@@ -24,6 +24,7 @@ signal player_die
 @onready var hurt_player = $HurtPlayer
 @onready var cooldown_progress = $CooldownProgress
 @onready var crosshair = $Crosshair
+@onready var player_2_health_bar = $UI/HUD/ProgressBar
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
@@ -57,6 +58,8 @@ func _ready():
 	shot_player.stream = shoot_sound
 	battery_player.stream = battery_sound
 	cooldown_progress.max_value = weapon_cooldown.wait_time
+	if player_id == 2:
+		player_2_health_bar.global_position += Vector2(0,60)
 
 func _process(delta):
 	if alive:

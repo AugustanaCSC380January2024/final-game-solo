@@ -338,9 +338,6 @@ collision_mask = 64
 position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_wm1ec")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
-
 [node name="EnergyOrbContainer" type="Node" parent="."]
 
 [node name="UI" parent="." instance=ExtResource("3_syg6f")]
