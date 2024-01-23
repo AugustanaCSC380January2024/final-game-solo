@@ -60,7 +60,7 @@ func _ready():
 
 func _process(delta):
 	if alive:
-		if Input.is_action_just_pressed("shoot_%s" % [player_id]):
+		if Input.is_action_just_pressed("shoot_%s" % [player_id]):# && controller_aim:
 			shoot()
 	cooldown_progress.value = weapon_cooldown.time_left
 
@@ -68,10 +68,15 @@ func _physics_process(delta):
 	if alive:
 		get_input()
 		move_and_slide()
-		aim()
+		if player_id == 2:
+			aim()
 		
 func aim():
 	look_vector.x = -(Input.get_action_strength("look_right_%s" % [player_id]) - Input.get_action_strength("look_left_%s" % [player_id]))
+	if look_vector.x > 0:
+		animated_sprite.flip_h = true
+	else:
+		animated_sprite.flip_h = false
 	look_vector.y = (Input.get_action_strength("look_up_%s" % [player_id]) - Input.get_action_strength("look_down_%s" % [player_id]))
 	if look_vector != Vector2.ZERO:
 		print("TURE")
@@ -84,22 +89,25 @@ func aim():
 	
 func get_input():
 	var input_direction = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_up_%s" % [player_id], "move_down_%s" % [player_id])
-	if global_position.x > get_global_mouse_position().x:
-		animated_sprite.flip_h = true
-	else:
-		animated_sprite.flip_h = false
+	if player_id == 2:
+		if global_position.x > get_global_mouse_position().x:
+			animated_sprite.flip_h = true
+		else:
+			animated_sprite.flip_h = false
 	velocity = input_direction * speed
 	if !animation_player.is_playing():
 		update_animations(input_direction)
 	
 func update_animations(direction):
 	if direction == Vector2.ZERO:
-		animated_sprite.play("idle")
+		animated_sprite.play("idle_%s" % [player_id])
 	else:
-		animated_sprite.play("walking")
+		animated_sprite.play("walking_%s" % [player_id])
 		
 func shoot():
 	if !cooldown && can_shoot:
+		if player_id == 2 && controller_aim == false:
+			return
 		cooldown = true
 		weapon_cooldown.start()
 		cooldown_progress.visible = true
@@ -109,10 +117,10 @@ func shoot():
 		energy_orb.scale = Vector2(bullet_size,bullet_size)
 		energy_orb.friendly = true
 		shot_player.play()
-		animation_player.play("shoot")
+		animation_player.play("shoot_%s" % [player_id])
 		energy_orb.global_position = global_position
 		energy_orb.position = position
-		if controller_aim:
+		if controller_aim && player_id == 2:
 			energy_orb.direction = -crosshair.global_position.direction_to(position)
 		else:
 			energy_orb.direction = -get_global_mouse_position().direction_to(position)
@@ -133,7 +141,7 @@ func die():
 		print("Dead")
 		alive = false
 		velocity = Vector2.ZERO
-		animation_player.play("die")
+		animation_player.play("die_%s" % [player_id])
 		await animation_player.animation_finished
 		visible = false
 		player_die.emit()
