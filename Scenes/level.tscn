@@ -4891,5 +4891,8 @@ scale = Vector2(1.6, 1.6)
 position = Vector2(-46, 82)
 scale = Vector2(1.6, 1.6)
 
-[node name="PlayerSpawn" type="Marker2D" parent="."]
+[node name="PlayerSpawn_1" type="Marker2D" parent="."]
 position = Vector2(353, 788)
+
+[node name="PlayerSpawn_2" type="Marker2D" parent="."]
+position = Vector2(386, 788)

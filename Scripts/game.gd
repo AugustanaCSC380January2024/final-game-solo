@@ -39,6 +39,7 @@ var batteries = 0
 
 var spawn_areas = []
 var two_players = false
+var both_dead = false
 
 func _ready():
 	player.can_shoot = false
@@ -187,23 +188,24 @@ func game_over():
 	await get_tree().create_timer(4).timeout
 	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
-func respawn_player():
+func respawn_player(dead_player):
+	if two_players:
+		var player2 = get_node("Player2")
+		if !player.alive && !player2.alive:
+			both_dead = true
 	var respawn_timer = $"CanvasLayer/Respawner/Respawn Timer"
-	var respawn_pos = $Level/PlayerSpawn
-	var player_health_bar = $Player/UI/HUD/ProgressBar
-	var player_cam = $Player/Camera2D
-	print("Respawning Player")
-	player.global_position = Vector2(1000,1000)
+	var respawn_pos = get_node("Level").get_node("PlayerSpawn_%s" % [dead_player.player_id])
+	var player_health_bar = dead_player.get_node("UI").get_node("HUD").get_node("ProgressBar")
+	dead_player.global_position = respawn_pos.global_position
 	respawner.visible = true
-	player_cam.global_position = beacon.global_position
 	respawner.respawn()
 	await respawn_timer.timeout
-	player.global_position = respawn_pos.global_position
-	player.alive = true
-	player.health = player.max_health
-	player.visible = true
-	player_cam.global_position = player.global_position
-	player_health_bar.value = player.health
+	dead_player.global_position = respawn_pos.global_position
+	dead_player.alive = true
+	dead_player.health = player.max_health
+	dead_player.visible = true
+	player_cam.global_position = dead_player.global_position
+	player_health_bar.value = dead_player.health
 	respawner.visible = false
 	
 	
@@ -245,18 +247,26 @@ func start_coop():
 	player2.name = "Player2"
 	add_child(player2)
 	player2.global_position = beacon.global_position + Vector2(0, 20)
+	player2.battery_collected.connect(add_battery)
+	player2.player_die.connect(respawn_player)
 	
 func update_player_cam():
 	if two_players:
 		var min_zoom = .5
 		var max_zoom = 2.5
 		var player2 = get_node("Player2")
-		player_cam.global_position = (player.global_position + player2.global_position) * .5
-		var distance = player.global_position.distance_to(player2.global_position)
-		var desired_zoom = distance /1000
-		var zoom_factor = max(min_zoom,max_zoom,desired_zoom)
-		player_cam.zoom = Vector2(zoom_factor, zoom_factor)
+		if both_dead:
+			player_cam.global_position = beacon.global_position
+		else:
+			player_cam.global_position = (player.global_position + player2.global_position) * .5
+			var distance = player.global_position.distance_to(player2.global_position)
+			var desired_zoom = distance /1000
+			var zoom_factor = max(min_zoom,max_zoom,desired_zoom)
+			player_cam.zoom = Vector2(zoom_factor, zoom_factor)
 	else:
-		player_cam.global_position = player.global_position
+		if !player.alive:
+				player_cam.global_position = beacon.global_position
+		else:
+			player_cam.global_position = player.global_position
 		player_cam.zoom = Vector2(2.5,2.5)
 	

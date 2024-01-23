@@ -84,7 +84,7 @@ func aim():
 	if look_vector != Vector2.ZERO:
 		print("TURE")
 		crosshair.visible = true
-		crosshair.position = -(look_vector*100)
+		crosshair.position = -(look_vector.normalized()*100)
 		controller_aim = true
 	else:
 		crosshair.visible = false
@@ -144,10 +144,11 @@ func die():
 		print("Dead")
 		alive = false
 		velocity = Vector2.ZERO
-		animation_player.play("die_%s" % [player_id])
-		await animation_player.animation_finished
+		#animation_player.play("die_%s" % [player_id])
+		#await animation_player.animation_finished
+		print("DONE")
 		visible = false
-		player_die.emit()
+		player_die.emit(self)
 
 
 

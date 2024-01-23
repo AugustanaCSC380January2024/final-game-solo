@@ -19,6 +19,8 @@ func _on_damage_button_pressed():
 		spend(int(damage_button.text))
 		damage_button.text = str(int(damage_button.text) + 5)
 		player.upgrade_damage()
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").upgrade_damage()
 
 
 func _on_bullet_speed_button_pressed():
@@ -27,6 +29,8 @@ func _on_bullet_speed_button_pressed():
 		spend(int(bullet_speed_button.text))
 		bullet_speed_button.text = str(int(bullet_speed_button.text) + 5)
 		player.upgrade_bullet_speed()
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").upgrade_bullet_speed()
 
 func _on_fire_rate_button_pressed():
 	get_batteries()
@@ -34,6 +38,8 @@ func _on_fire_rate_button_pressed():
 		spend(int(fire_rate_button.text))
 		fire_rate_button.text = str(int(fire_rate_button.text) + 5)
 		player.upgrade_weapon_cooldown()
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").upgrade_weapon_cooldown()
 
 func _on_heal_player_button_pressed():
 	get_batteries()
@@ -41,6 +47,8 @@ func _on_heal_player_button_pressed():
 		spend(int(heal_player_button.text))
 		player.max_health = player.max_health + player.max_health / 10.0
 		player.health += player.max_health / 10.0
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").max_health = player.max_health
 
 
 func _on_heal_beacon_button_pressed():
@@ -63,3 +71,6 @@ func _on_close_pressed():
 
 func get_batteries():
 	batteries = self.get_parent().get_parent().batteries
+
+func is_two_player():
+	return self.get_parent().get_parent().two_players
