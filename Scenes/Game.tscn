@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=17 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="Texture2D" uid="uid://cltm4mawnfgm1" path="res://Assets/Sprites/preview.png" id="2_d3552"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dls7fao8g2jch" path="res://Scenes/win_screen.tscn" id="10_rjgmj"]
 [ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
 [ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
+[ext_resource type="PackedScene" uid="uid://d3sp42xxap5qp" path="res://onscreen_controls.tscn" id="14_q6r3q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s2p76"]
 font_size = 32
@@ -45,6 +46,8 @@ position = Vector2(501, 335)
 
 [node name="Player" parent="." instance=ExtResource("2_nfu3v")]
 position = Vector2(573, 429)
+
+[node name="OnScreenControls" parent="." instance=ExtResource("14_q6r3q")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3

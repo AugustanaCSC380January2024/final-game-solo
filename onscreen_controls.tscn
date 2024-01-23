@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3sp42xxap5qp"]
+
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="1_n44qh"]
+[ext_resource type="Texture2D" uid="uid://duyvdxmqbri72" path="res://Assets/Sprites/EButton.png" id="2_dd3qp"]
+
+[node name="OnScreenControls" type="CanvasLayer"]
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("1_n44qh")]
+action_left = "move_left_1"
+action_right = "move_right_1"
+action_up = "move_up_1"
+action_down = "move_down_1"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(1078, 516)
+scale = Vector2(4.875, 4.875)
+texture_normal = ExtResource("2_dd3qp")
+action = "interact"
