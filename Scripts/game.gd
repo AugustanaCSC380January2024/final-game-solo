@@ -242,9 +242,11 @@ func _on_introduction_hidden():
 
 func start_coop():
 	two_players = true
-	var player2 = player_scene.instantiate()
+	#var player2 = player_scene.instantiate()
+	var player2 = player.duplicate()
 	player2.player_id = 2
 	player2.name = "Player2"
+	player2.bullet_size = player.bullet_size
 	add_child(player2)
 	player2.global_position = beacon.global_position + Vector2(0, 20)
 	player2.battery_collected.connect(add_battery)
