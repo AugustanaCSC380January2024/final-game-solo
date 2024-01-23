@@ -59,6 +59,7 @@ func _process(delta):
 		open_store_label.visible = true
 		if Input.is_action_just_pressed("interact"):
 			open_shop()
+			store_ui.damage_button.grab_focus()
 			Input.set_custom_mouse_cursor(null)
 	else:
 		open_store_label.visible = false

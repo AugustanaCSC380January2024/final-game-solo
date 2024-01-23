@@ -107,8 +107,8 @@ func die():
 				var battery_instance = battery.instantiate()
 				spawner.add_child(battery_instance)
 				battery_instance.global_position = global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
-		free()
-		#queue_free()
+		#free()
+		queue_free()
 
 func set_health_bar():
 	health_bar.max_value = health

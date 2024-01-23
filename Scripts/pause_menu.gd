@@ -1,10 +1,14 @@
 extends Control
 
 var crosshair = load("res://Assets/Sprites/crosshair111.png")
+@onready var resume = $Resume
+
+
 
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		change_pause_state()
+		resume.grab_focus()
 
 func change_pause_state():
 	if !get_tree().paused:

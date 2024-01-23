@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://drmbs3fxcl2db"]
+[gd_scene load_steps=27 format=3 uid="uid://drmbs3fxcl2db"]
 
 [ext_resource type="Texture2D" uid="uid://comtrm3l4gg0s" path="res://Assets/Sprites/players green x1.png" id="1_30igu"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_d27qr"]
 [ext_resource type="PackedScene" uid="uid://de0xpl6ms7nfv" path="res://Scenes/ui.tscn" id="3_syg6f"]
+[ext_resource type="PackedScene" uid="uid://dxb5jbvwrlm2l" path="res://Scenes/crosshair.tscn" id="4_r8eki"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3n86n"]
 atlas = ExtResource("1_30igu")
@@ -234,6 +235,8 @@ offset_top = 19.0
 offset_right = 12.0
 offset_bottom = 23.0
 show_percentage = false
+
+[node name="Crosshair" parent="." instance=ExtResource("4_r8eki")]
 
 [connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]
 [connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]

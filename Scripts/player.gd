@@ -21,6 +21,7 @@ signal player_die
 @onready var weapon_cooldown = $WeaponCooldown
 @onready var hurt_player = $HurtPlayer
 @onready var cooldown_progress = $CooldownProgress
+@onready var crosshair = $Crosshair
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
@@ -37,6 +38,8 @@ var energy_orb_container
 var alive = true
 var cooldown = false
 var can_shoot: bool = true
+var look_vector = Vector2.ZERO
+var controller_aim = false
 
 var energy_orb_scene = preload("res://Scenes/Projectiles/energy_orb.tscn")
 
@@ -63,6 +66,19 @@ func _physics_process(delta):
 	if alive:
 		get_input()
 		move_and_slide()
+		aim()
+		
+func aim():
+	look_vector.x = -(Input.get_action_strength("look_right") - Input.get_action_strength("look_left"))
+	look_vector.y = (Input.get_action_strength("look_up") - Input.get_action_strength("look_down"))
+	if look_vector != Vector2.ZERO:
+		print("TURE")
+		crosshair.visible = true
+		crosshair.position = -(look_vector*100)
+		controller_aim = true
+	else:
+		crosshair.visible = false
+		controller_aim = false
 	
 func get_input():
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -94,7 +110,10 @@ func shoot():
 		animation_player.play("shoot")
 		energy_orb.global_position = global_position
 		energy_orb.position = position
-		energy_orb.direction = -get_global_mouse_position().direction_to(position)
+		if controller_aim:
+			energy_orb.direction = -crosshair.global_position.direction_to(position)
+		else:
+			energy_orb.direction = -get_global_mouse_position().direction_to(position)
 		energy_orb_container.add_child(energy_orb)
 
 func take_damage(damage):

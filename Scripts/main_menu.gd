@@ -5,6 +5,8 @@ extends Control
 @onready var quit = $Quit
 @onready var credits = $Credits
 
+func _ready():
+	play.grab_focus()
 
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Scenes/Game.tscn")
