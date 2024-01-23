@@ -5,6 +5,8 @@ extends CharacterBody2D
 
 @export var speed = 100
 
+@export var player_id = 1
+
 var bullet_damage: float = 1.0
 var bullet_speed: float = 150
 var fire_rate: float = 2.0
@@ -58,7 +60,7 @@ func _ready():
 
 func _process(delta):
 	if alive:
-		if Input.is_action_just_pressed("shoot"):
+		if Input.is_action_just_pressed("shoot_%s" % [player_id]):
 			shoot()
 	cooldown_progress.value = weapon_cooldown.time_left
 
@@ -69,8 +71,8 @@ func _physics_process(delta):
 		aim()
 		
 func aim():
-	look_vector.x = -(Input.get_action_strength("look_right") - Input.get_action_strength("look_left"))
-	look_vector.y = (Input.get_action_strength("look_up") - Input.get_action_strength("look_down"))
+	look_vector.x = -(Input.get_action_strength("look_right_%s" % [player_id]) - Input.get_action_strength("look_left_%s" % [player_id]))
+	look_vector.y = (Input.get_action_strength("look_up_%s" % [player_id]) - Input.get_action_strength("look_down_%s" % [player_id]))
 	if look_vector != Vector2.ZERO:
 		print("TURE")
 		crosshair.visible = true
@@ -81,7 +83,7 @@ func aim():
 		controller_aim = false
 	
 func get_input():
-	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var input_direction = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_up_%s" % [player_id], "move_down_%s" % [player_id])
 	if global_position.x > get_global_mouse_position().x:
 		animated_sprite.flip_h = true
 	else:

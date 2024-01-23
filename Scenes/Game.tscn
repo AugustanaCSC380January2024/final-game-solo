@@ -46,6 +46,10 @@ position = Vector2(501, 335)
 [node name="Player" parent="." instance=ExtResource("2_nfu3v")]
 position = Vector2(573, 429)
 
+[node name="Player2" parent="." instance=ExtResource("2_nfu3v")]
+position = Vector2(647, 420)
+player_id = 2
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RoundStartLabel" type="Label" parent="CanvasLayer"]

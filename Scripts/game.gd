@@ -67,7 +67,7 @@ func _process(delta):
 		check_for_living_enemies()
 	if $CanvasLayer/Introduction.visible:
 		Input.set_custom_mouse_cursor(null)
-		
+	
 	
 
 func get_spawn_areas():
