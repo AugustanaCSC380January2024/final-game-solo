@@ -78,13 +78,13 @@ func aim():
 	look_vector.x = -(Input.get_action_strength("look_right_%s" % [player_id]) - Input.get_action_strength("look_left_%s" % [player_id]))
 	if look_vector.x > 0:
 		animated_sprite.flip_h = true
-	else:
+	elif look_vector.x < 0:
 		animated_sprite.flip_h = false
 	look_vector.y = (Input.get_action_strength("look_up_%s" % [player_id]) - Input.get_action_strength("look_down_%s" % [player_id]))
 	if look_vector != Vector2.ZERO:
 		print("TURE")
 		crosshair.visible = true
-		crosshair.position = -(look_vector.normalized()*100)
+		crosshair.position = -(look_vector.normalized()*40)
 		controller_aim = true
 	else:
 		crosshair.visible = false
@@ -92,7 +92,7 @@ func aim():
 	
 func get_input():
 	var input_direction = Input.get_vector("move_left_%s" % [player_id], "move_right_%s" % [player_id], "move_up_%s" % [player_id], "move_down_%s" % [player_id])
-	if player_id == 2:
+	if player_id == 1:
 		if global_position.x > get_global_mouse_position().x:
 			animated_sprite.flip_h = true
 		else:
