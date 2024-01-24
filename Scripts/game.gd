@@ -233,6 +233,7 @@ func respawn_player(dead_player):
 	player_cam.global_position = dead_player.global_position
 	player_health_bar.value = dead_player.health
 	respawner.visible = false
+	both_dead = false
 	
 	
 
