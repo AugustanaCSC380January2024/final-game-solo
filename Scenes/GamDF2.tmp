@@ -1,0 +1,155 @@
+[gd_scene load_steps=17 format=3 uid="uid://moe1f3j4jv5q"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
+[ext_resource type="Texture2D" uid="uid://cltm4mawnfgm1" path="res://Assets/Sprites/preview.png" id="2_d3552"]
+[ext_resource type="PackedScene" uid="uid://b1w8hy0r2u7a4" path="res://Scenes/level.tscn" id="2_i7anh"]
+[ext_resource type="PackedScene" uid="uid://drmbs3fxcl2db" path="res://Scenes/player.tscn" id="2_nfu3v"]
+[ext_resource type="PackedScene" uid="uid://hpspf1de1ymv" path="res://Scenes/store.tscn" id="3_ft71n"]
+[ext_resource type="PackedScene" uid="uid://bfc0t21sbx2pr" path="res://Scenes/respawner.tscn" id="6_05mb5"]
+[ext_resource type="PackedScene" uid="uid://b4oyb11633xu" path="res://Scenes/beacon.tscn" id="6_87qat"]
+[ext_resource type="PackedScene" uid="uid://db5lq5ps2x3a7" path="res://Scenes/store_ui.tscn" id="6_umooq"]
+[ext_resource type="PackedScene" uid="uid://b1glgh8v4uhpv" path="res://Scenes/pause_menu.tscn" id="7_3m5yg"]
+[ext_resource type="PackedScene" uid="uid://dtwyrh14vud6i" path="res://Scenes/battery_count.tscn" id="7_lisl0"]
+[ext_resource type="PackedScene" uid="uid://dls7fao8g2jch" path="res://Scenes/win_screen.tscn" id="10_rjgmj"]
+[ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
+[ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
+[ext_resource type="PackedScene" uid="uid://c24466ica1354" path="res://Scenes/green_wave_shader.tscn" id="14_1wvr0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s2p76"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_kb3ud"]
+font_size = 32
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_wvqwh")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="GreenWaveShader" parent="CanvasLayer2" instance=ExtResource("14_1wvr0")]
+color = Color(0, 0, 0, 0)
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_d3552")
+stretch_mode = 1
+
+[node name="Level" parent="." instance=ExtResource("2_i7anh")]
+
+[node name="Store" parent="." instance=ExtResource("3_ft71n")]
+position = Vector2(661, 41)
+
+[node name="Beacon" parent="." instance=ExtResource("6_87qat")]
+position = Vector2(501, 335)
+
+[node name="Player" parent="." instance=ExtResource("2_nfu3v")]
+position = Vector2(573, 429)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="RoundStartLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.0
+offset_top = -76.0
+offset_right = 67.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "ROUND: "
+
+[node name="RoundLabelTimer" type="Timer" parent="CanvasLayer/RoundStartLabel"]
+wait_time = 4.0
+one_shot = true
+
+[node name="OpenStoreLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -69.0
+offset_right = 256.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press \"E\" to open Store!"
+label_settings = SubResource("LabelSettings_s2p76")
+
+[node name="Press E to start" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.5
+offset_top = -67.0
+offset_right = 135.5
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press \"E\" to start!"
+label_settings = SubResource("LabelSettings_kb3ud")
+
+[node name="Battery Count" parent="CanvasLayer" instance=ExtResource("7_lisl0")]
+
+[node name="Respawner" parent="CanvasLayer" instance=ExtResource("6_05mb5")]
+visible = false
+
+[node name="StoreUI" parent="CanvasLayer" instance=ExtResource("6_umooq")]
+visible = false
+
+[node name="WinScreen" parent="CanvasLayer" instance=ExtResource("10_rjgmj")]
+visible = false
+
+[node name="Introduction" parent="CanvasLayer" instance=ExtResource("10_wbaxq")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("7_3m5yg")]
+visible = false
+
+[node name="PlayerCam" type="Camera2D" parent="."]
+use_parent_material = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="RoundMusicPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+
+[node name="RoundOverPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -6.0
+
+[node name="AmbientMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_q4q2j")
+volume_db = -6.0
+
+[connection signal="body_entered" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_entered"]
+[connection signal="body_exited" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_exited"]
+[connection signal="body_entered" from="Beacon/StartRoundArea" to="." method="_on_start_round_area_body_entered"]
+[connection signal="body_exited" from="Beacon/StartRoundArea" to="." method="_on_start_round_area_body_exited"]
+[connection signal="hidden" from="CanvasLayer/Introduction" to="." method="_on_introduction_hidden"]
+[connection signal="visibility_changed" from="CanvasLayer/Introduction" to="." method="_on_introduction_visibility_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="Store"]
+[editable path="Beacon"]

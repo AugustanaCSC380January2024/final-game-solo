@@ -4907,3 +4907,11 @@ texture = ExtResource("4_7mscr")
 [node name="PointLight2D2" type="PointLight2D" parent="Lights"]
 position = Vector2(661, 67)
 texture = ExtResource("4_7mscr")
+
+[node name="DefaultPlayerSpawns" type="Node" parent="."]
+
+[node name="0" type="Marker2D" parent="DefaultPlayerSpawns" groups=["player_spawn_point"]]
+position = Vector2(467, 401)
+
+[node name="1" type="Marker2D" parent="DefaultPlayerSpawns" groups=["player_spawn_point"]]
+position = Vector2(526, 401)

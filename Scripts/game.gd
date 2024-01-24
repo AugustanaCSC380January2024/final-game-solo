@@ -4,6 +4,8 @@ var crosshair = preload("res://Assets/Sprites/crosshair111.png")
 var game_over_sound = preload("res://Assets/Sounds/BOS_DBN_145_FX_Impact_Loop_Profit_F.wav")
 var player_scene = preload("res://Scenes/player.tscn")
 
+var NETWORK_COOP = false
+
 @onready var level = $Level/SpawnAreas
 @onready var player = get_node("Player")
 @onready var beacon = get_node("Beacon")
@@ -46,6 +48,9 @@ var both_dead = false
 
 
 func _ready():
+	#var index = 1
+	#for user in GameManager.Players:
+		#var currentPlayer = Player
 	player.can_shoot = false
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
