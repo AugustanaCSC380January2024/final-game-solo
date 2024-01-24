@@ -38,6 +38,7 @@ var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false
 var player_in_store_region = false
+var game_over_cam = false
 
 var batteries = 0
 
@@ -203,6 +204,7 @@ func update_beacon_health():
 	update_beacon_health_bar.emit(beacon.current_health)
 	
 func game_over():
+	game_over_cam = true
 	var explosion_scene = load("res://Scenes/explosion.tscn")
 	var explosion = explosion_scene.instantiate()
 	player_cam.global_position = beacon.global_position
@@ -280,6 +282,8 @@ func start_coop():
 	player2.player_die.connect(respawn_player)
 	
 func update_player_cam():
+	if game_over_cam:
+		return
 	if two_players:
 		var min_zoom = .5
 		var max_zoom = 2.5

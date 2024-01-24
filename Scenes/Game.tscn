@@ -16,18 +16,18 @@
 [ext_resource type="PackedScene" uid="uid://c24466ica1354" path="res://Scenes/green_wave_shader.tscn" id="14_1wvr0"]
 [ext_resource type="Shader" path="res://Shaders/Blur Vignette.gdshader" id="14_oxyqv"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nelfe"]
+shader = ExtResource("14_oxyqv")
+shader_parameter/blur_radius = 0.561
+shader_parameter/blur_amount = 1.15
+shader_parameter/blur_inner = 0.284
+shader_parameter/blur_outer = 0.818
+
 [sub_resource type="LabelSettings" id="LabelSettings_s2p76"]
 font_size = 32
 
 [sub_resource type="LabelSettings" id="LabelSettings_kb3ud"]
 font_size = 32
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nelfe"]
-shader = ExtResource("14_oxyqv")
-shader_parameter/blur_radius = 1.0
-shader_parameter/blur_amount = 5.0
-shader_parameter/blur_inner = 1.0
-shader_parameter/blur_outer = 0.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wvqwh")
@@ -48,6 +48,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_d3552")
 stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+material = SubResource("ShaderMaterial_nelfe")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Level" parent="." instance=ExtResource("2_i7anh")]
 
@@ -134,14 +142,6 @@ visible = false
 [node name="PlayerCam" type="Camera2D" parent="."]
 visible = false
 use_parent_material = true
-
-[node name="ColorRect" type="ColorRect" parent="PlayerCam"]
-material = SubResource("ShaderMaterial_nelfe")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
