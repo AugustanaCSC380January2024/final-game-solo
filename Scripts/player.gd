@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var bullet_damage: float = 1.0
 var bullet_speed: float = 150
-var fire_rate: float = 2.0
+var fire_rate: float = 1.5
 var bullet_size:float = 1
 
 signal battery_collected
