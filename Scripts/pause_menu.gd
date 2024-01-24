@@ -58,5 +58,9 @@ func _on_save_pressed():
 	file.store_var(game.round)
 	file.store_var(game.batteries)
 	file.store_var(beacon.current_health)
-	
+	file.store_var(store.damage_button.text)
+	file.store_var(store.bullet_speed_button.text)
+	file.store_var(store.fire_rate_button.text)
+	file.store_var(store.heal_player_button.text)
+	file.store_var(store.heal_beacon_button.text)
 	pass # Replace with function body.

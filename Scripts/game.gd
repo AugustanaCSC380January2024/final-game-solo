@@ -25,6 +25,7 @@ var NETWORK_COOP = false
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var player_cam = $PlayerCam
 @onready var lights = $Level/Lights
+@onready var introduction = $CanvasLayer/Introduction
 
 signal update_battery_display
 signal update_beacon_health_bar_max
@@ -57,13 +58,21 @@ func _ready():
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
-	if Loader.has_save():
+	if Loader.load_game:
 		player.bullet_damage = Loader.bullet_damage
 		player.bullet_speed = Loader.bullet_speed
 		player.fire_rate = Loader.fire_rate
 		player.bullet_size = Loader.bullet_size
 		round = Loader.round
 		set_batteries(Loader.batteries)
+		beacon.current_health = Loader.beacon_health
+		update_beacon_health()
+		store_ui.damage_button.text = Loader.damage_button
+		store_ui.bullet_speed_button.text = Loader.bullet_speed_button
+		store_ui.fire_rate_button.text = Loader.fire_rate_button
+		store_ui.heal_player_button = Loader.heal_player_button
+		store_ui.heal_beacon_button = Loader.heal_beacon_button
+		introduction.hide()
 	else:
 		set_batteries(10)
 	
