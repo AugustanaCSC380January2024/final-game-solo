@@ -6,6 +6,8 @@ var crosshair = load("res://Assets/Sprites/crosshair111.png")
 @onready var resume = $Resume
 @onready var add_player_2_button = $AddPlayer2
 @onready var player = get_parent().get_parent().get_node("Player")
+@onready var beacon = get_parent().get_parent().get_node("Beacon")
+@onready var store = get_parent().get_parent().get_node("CanvasLayer").get_node("StoreUI")
 @onready var game = get_parent().get_parent()
 
 signal add_player_2
@@ -55,4 +57,6 @@ func _on_save_pressed():
 	file.store_var(player.bullet_size)
 	file.store_var(game.round)
 	file.store_var(game.batteries)
+	file.store_var(beacon.current_health)
+	
 	pass # Replace with function body.

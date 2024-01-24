@@ -57,7 +57,15 @@ func _ready():
 	update_beacon_max_label()
 	get_spawn_areas()
 	Input.set_custom_mouse_cursor(crosshair,0,Vector2(32,32))
-	set_batteries(1000)
+	if Loader.has_save():
+		player.bullet_damage = Loader.bullet_damage
+		player.bullet_speed = Loader.bullet_speed
+		player.fire_rate = Loader.fire_rate
+		player.bullet_size = Loader.bullet_size
+		round = Loader.round
+		set_batteries(Loader.batteries)
+	else:
+		set_batteries(10)
 	
 
 func _process(delta):
