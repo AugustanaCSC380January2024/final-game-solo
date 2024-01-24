@@ -48,9 +48,6 @@ var both_dead = false
 
 
 func _ready():
-	#var index = 1
-	#for user in GameManager.Players:
-		#var currentPlayer = Player
 	player.can_shoot = false
 	beacon.beacon_take_damage.connect(beacon_take_damage)
 	player.battery_collected.connect(add_battery)
@@ -282,6 +279,8 @@ func update_player_cam():
 		if !player.alive:
 				player_cam.global_position = beacon.global_position
 		else:
+			print("TRUER")
 			player_cam.global_position = player.global_position
-		player_cam.zoom = Vector2(2.5,2.5)
+			print(player.global_position)
+			player_cam.zoom = Vector2(2.5,2.5)
 	

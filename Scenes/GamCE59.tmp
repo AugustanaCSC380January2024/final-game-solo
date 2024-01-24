@@ -50,7 +50,7 @@ position = Vector2(661, 41)
 position = Vector2(501, 335)
 
 [node name="Player" parent="." instance=ExtResource("2_nfu3v")]
-position = Vector2(468, 397)
+position = Vector2(-112, 67)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3

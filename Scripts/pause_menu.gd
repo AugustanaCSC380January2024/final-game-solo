@@ -1,8 +1,12 @@
 extends Control
 
+var save_path = "user://aiovercharged.save"
+
 var crosshair = load("res://Assets/Sprites/crosshair111.png")
 @onready var resume = $Resume
 @onready var add_player_2_button = $AddPlayer2
+@onready var player = get_parent().get_parent().get_node("Player")
+@onready var game = get_parent().get_parent()
 
 signal add_player_2
 
@@ -40,3 +44,15 @@ func _on_add_player_2_pressed():
 	add_player_2.emit()
 	add_player_2_button.queue_free()
 	change_pause_state()
+
+
+func _on_save_pressed():
+	var file = FileAccess.open(save_path,FileAccess.WRITE)
+	file.store_var(player.max_health)
+	file.store_var(player.bullet_damage)
+	file.store_var(player.bullet_speed)
+	file.store_var(player.fire_rate)
+	file.store_var(player.bullet_size)
+	file.store_var(game.round)
+	file.store_var(game.batteries)
+	pass # Replace with function body.
