@@ -13,7 +13,7 @@ func _ready():
 
 func spawn_enemy(player, beacon, scaling_difficulty):
 	var spawnable_enemy = enemy_array.pick_random().instantiate()
-	spawnable_enemy.scale = Vector2(.6,.6)
+	#spawnable_enemy.scale = Vector2(.6,.6)
 	spawnable_enemy.base_damage = spawnable_enemy.base_damage * (1 + .1) ** scaling_difficulty
 	spawnable_enemy.player = player
 	spawnable_enemy.beacon = beacon

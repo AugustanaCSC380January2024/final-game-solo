@@ -17,6 +17,7 @@ var battery = preload("res://Scenes/battery.tscn")
 var health: float
 @export var player: Node2D
 @export var beacon: StaticBody2D
+var base_scale = .6
 
 @onready var projectile_container = get_node("ProjectileContainer")
 @onready var navigation_agent = get_node("NavigationAgent2D")
@@ -39,6 +40,7 @@ func _ready():
 	set_health_bar()
 	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 	hurt_audio_player.stream = hurt_sound
+	update_size()
 	
 
 func _physics_process(delta: float):
@@ -86,7 +88,8 @@ func take_damage(damage):
 		current_health += damage
 		hurt_audio_player.play()
 		set_health_bar()
-		scale += Vector2(.01, .01)
+		#scale += Vector2(.01, .01)
+		update_size()
 		if current_health >= health:
 			die()
 
@@ -142,6 +145,9 @@ func shoot(body):
 
 func set_health(new_health):
 	health = new_health
+
+func update_size():
+	scale = Vector2(base_scale,base_scale) + Vector2(current_health/30.0,current_health/30.0)
 
 
 
