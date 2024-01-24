@@ -1,4 +1,5 @@
 extends Area2D
+class_name Projectile
 
 @export var direction: Vector2
 @export var speed: float = 150

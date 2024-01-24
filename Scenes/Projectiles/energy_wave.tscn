@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://behaganruci2v"]
+
+[ext_resource type="Texture2D" uid="uid://qwww6or4ikb0" path="res://Assets/Sprites/projectiles x1.png" id="1_aiu7r"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="1_txmgo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g68jx"]
+atlas = ExtResource("1_aiu7r")
+region = Rect2(0, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhpi0"]
+atlas = ExtResource("1_aiu7r")
+region = Rect2(32, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6an1"]
+atlas = ExtResource("1_aiu7r")
+region = Rect2(64, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aswmr"]
+atlas = ExtResource("1_aiu7r")
+region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxunl"]
+atlas = ExtResource("1_aiu7r")
+region = Rect2(128, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftece"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g68jx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhpi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6an1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aswmr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxunl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2namq"]
+radius = 9.0
+height = 28.0
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 16
+collision_mask = 35
+script = ExtResource("1_txmgo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ftece")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+rotation = 4.71239
+shape = SubResource("CapsuleShape2D_2namq")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Lifetime" to="." method="_on_lifetime_timeout"]

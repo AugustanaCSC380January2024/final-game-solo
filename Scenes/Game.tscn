@@ -13,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dls7fao8g2jch" path="res://Scenes/win_screen.tscn" id="10_rjgmj"]
 [ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
 [ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
-[ext_resource type="PackedScene" uid="uid://c24466ica1354" path="res://Scenes/green_wave_shader.tscn" id="14_1wvr0"]
 [ext_resource type="Shader" path="res://Shaders/Blur Vignette.gdshader" id="14_oxyqv"]
+[ext_resource type="PackedScene" uid="uid://bhlxvss7pgl3v" path="res://Scenes/boss.tscn" id="15_mfj7w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nelfe"]
 shader = ExtResource("14_oxyqv")
@@ -31,11 +31,6 @@ font_size = 32
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wvqwh")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-
-[node name="GreenWaveShader" parent="CanvasLayer2" instance=ExtResource("14_1wvr0")]
-color = Color(0, 0, 0, 0)
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -100
@@ -159,6 +154,11 @@ volume_db = -6.0
 [node name="AmbientMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_q4q2j")
 volume_db = -6.0
+
+[node name="Boss" parent="." node_paths=PackedStringArray("player", "beacon") instance=ExtResource("15_mfj7w")]
+position = Vector2(335, 357)
+player = NodePath("../Player")
+beacon = NodePath("../Beacon")
 
 [connection signal="body_entered" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_entered"]
 [connection signal="body_exited" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_exited"]

@@ -18,6 +18,7 @@ var health: float
 @export var player: Node2D
 @export var beacon: StaticBody2D
 var base_scale = .6
+var max_size = Vector2(1.5,1.5)
 
 @onready var projectile_container = get_node("ProjectileContainer")
 @onready var navigation_agent = get_node("NavigationAgent2D")
@@ -148,6 +149,8 @@ func set_health(new_health):
 
 func update_size():
 	scale = Vector2(base_scale,base_scale) + Vector2(current_health/30.0,current_health/30.0)
+	if scale > max_size:
+		scale = max_size
 
 
 
