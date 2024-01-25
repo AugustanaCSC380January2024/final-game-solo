@@ -1,17 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://dtwyrh14vud6i"]
 
-[ext_resource type="Texture2D" uid="uid://mue8r6mx6gtt" path="res://Assets/Sprites/items.png" id="1_nl556"]
 [ext_resource type="Script" path="res://Scripts/battery_count.gd" id="1_tmehc"]
+[ext_resource type="Texture2D" uid="uid://bk11ofhrjtb4h" path="res://Assets/Sprites/battery2.png" id="2_dmfua"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5exy"]
-atlas = ExtResource("1_nl556")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs2fr"]
+atlas = ExtResource("2_dmfua")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tp23j"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b5exy")
+"texture": SubResource("AtlasTexture_fs2fr")
 }],
 "loop": true,
 "name": &"default",

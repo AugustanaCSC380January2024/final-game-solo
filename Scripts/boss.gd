@@ -6,10 +6,10 @@ var base_damage = 50
 
 func _ready():
 	shoot_sound_player.stream = preload("res://Assets/Sounds/Shoot/FireballPassByHeavy_SFXB.63.wav")
-	health = 200
+	health = 80
 	speed = 10
 	base_scale = 1.2
-	max_size = Vector2(1.5,1.5)
+	max_size = Vector2(1.3,1.3)
 	super._ready()
 
 func _physics_process(delta):
