@@ -35,6 +35,7 @@ var max_size = Vector2(1.5,1.5)
 var player_detection_distance = 20
 var distance_offset = 64
 var beacon_location = Vector2.ZERO
+var moving = false
 
 func _ready():
 	health_bar.max_value = health
@@ -55,7 +56,7 @@ func _physics_process(delta: float):
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
 		if (!((beacon.global_position.x - distance_offset <= global_position.x and global_position.x <= beacon.global_position.x + distance_offset) and (beacon.global_position.y - distance_offset <= global_position.y and global_position.y <= beacon.global_position.y + distance_offset)) || player_in_range):
-			#print("I SHOULD BE SLIDING")
+			moving = true
 			move_and_slide()
 			if !animation_player.is_playing():
 				update_animations(direction)

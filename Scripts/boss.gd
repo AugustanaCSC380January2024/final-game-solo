@@ -2,15 +2,20 @@ extends DefaultEnemy
 
 var energy_wave_scene = preload("res://Scenes/Projectiles/energy_wave.tscn")
 
-var base_damage = 10
+var base_damage = 50
 
 func _ready():
-	#shoot_sound_player.stream()
+	shoot_sound_player.stream = preload("res://Assets/Sounds/Shoot/FireballPassByHeavy_SFXB.63.wav")
 	health = 20
 	speed = 10
 	base_scale = 1.2
 	max_size = Vector2(2,2)
 	super._ready()
+
+func _physics_process(delta):
+	super._physics_process(delta)
+	if moving && !$FootstepPlayer.playing:
+		$FootstepPlayer.play()
 
 func shoot(body):
 	super.shoot(body)
@@ -22,9 +27,7 @@ func shoot(body):
 
 
 func _on_weapon_timer_timeout():
-	if player_in_range:
-		shoot(player)
-	elif beacon_in_range:
+	if beacon_in_range:
 		shoot(beacon)
 
 func generate_wave(body):

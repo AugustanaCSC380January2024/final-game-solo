@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://bhlxvss7pgl3v"]
+[gd_scene load_steps=40 format=3 uid="uid://bhlxvss7pgl3v"]
 
 [ext_resource type="Script" path="res://Scripts/boss.gd" id="1_36gm7"]
 [ext_resource type="Texture2D" uid="uid://bl8trh3x047vl" path="res://Assets/Sprites/boss x1.png" id="2_75vxb"]
 [ext_resource type="PackedScene" uid="uid://ip6whddob0p0" path="res://Scenes/health_bar.tscn" id="3_527p0"]
+[ext_resource type="AudioStream" uid="uid://c7kdxjil8i3oc" path="res://Assets/Sounds/FF_HFFX_foley_footstep_creature_teal.wav" id="4_1n48e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hyovy"]
 atlas = ExtResource("2_75vxb")
@@ -309,7 +310,7 @@ shape = SubResource("CircleShape2D_mwe37")
 [node name="ProjectileContainer" type="Node" parent="."]
 
 [node name="WeaponTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -319,6 +320,9 @@ libraries = {
 [node name="HurtSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 
 [node name="ShootSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_1n48e")
 
 [connection signal="timeout" from="NavigationTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
