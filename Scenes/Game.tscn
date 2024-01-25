@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=18 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="Texture2D" uid="uid://cltm4mawnfgm1" path="res://Assets/Sprites/preview.png" id="2_d3552"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
 [ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
 [ext_resource type="Shader" path="res://Shaders/Blur Vignette.gdshader" id="14_oxyqv"]
-[ext_resource type="PackedScene" uid="uid://bhlxvss7pgl3v" path="res://Scenes/boss.tscn" id="15_mfj7w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nelfe"]
 shader = ExtResource("14_oxyqv")
@@ -154,11 +153,6 @@ volume_db = -6.0
 [node name="AmbientMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_q4q2j")
 volume_db = -6.0
-
-[node name="Boss" parent="." node_paths=PackedStringArray("player", "beacon") instance=ExtResource("15_mfj7w")]
-position = Vector2(335, 357)
-player = NodePath("../Player")
-beacon = NodePath("../Beacon")
 
 [connection signal="body_entered" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_entered"]
 [connection signal="body_exited" from="Store/StoreOpenArea" to="." method="_on_store_open_area_body_exited"]

@@ -110,6 +110,8 @@ func clear_spawn_area():
 	spawn_areas.clear()
 	
 func spawn_enemies(amount, player, beacon, scaling_difficulty):
+	if round % 5 == 0:
+		$Level/BossSpawnArea.spawn_boss(player,beacon,scaling_difficulty)
 	for enemy_num in amount:
 		spawn_timer.start(randf() * 5)
 		await spawn_timer.timeout

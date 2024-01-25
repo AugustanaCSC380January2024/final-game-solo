@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b1w8hy0r2u7a4"]
+[gd_scene load_steps=11 format=3 uid="uid://b1w8hy0r2u7a4"]
 
 [ext_resource type="Texture2D" uid="uid://db6708pvqge48" path="res://Assets/Sprites/tileset x1.png" id="1_bqd5i"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="2_ak6rc"]
 [ext_resource type="PackedScene" uid="uid://d2bw8vjnefgs8" path="res://Scenes/spawn_area.tscn" id="2_wdqyd"]
 [ext_resource type="Texture2D" uid="uid://l514oyj77esg" path="res://Assets/light_circle.png" id="4_7mscr"]
+[ext_resource type="Script" path="res://Scripts/spawn_area.gd" id="5_20brd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_kgrit"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -4834,6 +4835,8 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_cc37d")
 sources/1 = SubResource("TileSetAtlasSource_q1xxk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb6ho"]
+
 [node name="Level" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -4915,3 +4918,10 @@ position = Vector2(467, 401)
 
 [node name="1" type="Marker2D" parent="DefaultPlayerSpawns" groups=["player_spawn_point"]]
 position = Vector2(526, 401)
+
+[node name="BossSpawnArea" type="Area2D" parent="."]
+script = ExtResource("5_20brd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossSpawnArea"]
+position = Vector2(-193, 69)
+shape = SubResource("RectangleShape2D_eb6ho")
