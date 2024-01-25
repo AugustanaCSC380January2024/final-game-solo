@@ -360,6 +360,9 @@ volume_db = -6.0
 [node name="WeaponCooldown" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="SirenCooldown" type="Timer" parent="."]
+one_shot = true
+
 [node name="CooldownProgress" type="ProgressBar" parent="."]
 visible = false
 offset_left = -12.0
@@ -373,3 +376,4 @@ visible = false
 
 [connection signal="area_shape_entered" from="CoinCollection" to="." method="_on_coin_collection_area_shape_entered"]
 [connection signal="timeout" from="WeaponCooldown" to="." method="_on_weapon_cooldown_timeout"]
+[connection signal="timeout" from="SirenCooldown" to="." method="_on_siren_cooldown_timeout"]

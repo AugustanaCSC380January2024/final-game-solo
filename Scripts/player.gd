@@ -11,6 +11,8 @@ var bullet_damage: float = 1.0
 var bullet_speed: float = 150
 var fire_rate: float = 1.5
 var bullet_size:float = 1
+var siren_lifespan: float = 3
+var siren_cooldown: float = 30
 
 signal battery_collected
 signal player_die
@@ -21,6 +23,7 @@ signal player_die
 @onready var shot_player = $ShotPlayer
 @onready var battery_player = $BatteryPlayer
 @onready var weapon_cooldown = $WeaponCooldown
+@onready var siren_cooldown_timer = $SirenCooldown
 @onready var hurt_player = $HurtPlayer
 @onready var cooldown_progress = $CooldownProgress
 @onready var crosshair = $Crosshair
@@ -41,6 +44,7 @@ var energy_orb_container
 var alive = true
 var cooldown = false
 var can_shoot: bool = true
+var siren_on_cooldown: bool = false
 var look_vector = Vector2.ZERO
 var controller_aim = false
 
@@ -58,8 +62,10 @@ func _ready():
 	shot_player.stream = shoot_sound
 	battery_player.stream = battery_sound
 	cooldown_progress.max_value = weapon_cooldown.wait_time
+	siren_cooldown_timer.wait_time = siren_cooldown
 	if player_id == 2:
 		player_2_health_bar.global_position += Vector2(0,60)
+		
 
 func _process(delta):
 	if alive:
@@ -184,8 +190,15 @@ func update_health_bar():
 	$UI/HUD/ProgressBar.value = health
 
 func activate_siren():
-	var siren = preload("res://Scenes/siren.tscn").instantiate()
-	siren.global_position = global_position
-	$SirenContainer.add_child(siren)
-	print("Called")
+	if get_tree().get_first_node_in_group("siren") == null && !siren_on_cooldown:
+		var siren = preload("res://Scenes/siren.tscn").instantiate()
+		siren.global_position = global_position
+		$SirenContainer.add_child(siren)
+		siren_cooldown_timer.start()
+		siren_on_cooldown = true
+		print("Called")
 	
+
+
+func _on_siren_cooldown_timeout():
+	siren_on_cooldown = false
