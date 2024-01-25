@@ -340,6 +340,8 @@ shape = SubResource("CircleShape2D_wm1ec")
 
 [node name="EnergyOrbContainer" type="Node" parent="."]
 
+[node name="SirenContainer" type="Node" parent="."]
+
 [node name="UI" parent="." instance=ExtResource("3_syg6f")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

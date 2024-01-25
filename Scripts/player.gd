@@ -64,7 +64,11 @@ func _ready():
 func _process(delta):
 	if alive:
 		if Input.is_action_just_pressed("shoot_%s" % [player_id]):# && controller_aim:
+			print("Shot")
 			shoot()
+		if Input.is_action_just_pressed("ability_%s" % [player_id]):
+			print("Caught")
+			activate_siren()
 	cooldown_progress.value = weapon_cooldown.time_left
 
 func _physics_process(delta):
@@ -82,7 +86,6 @@ func aim():
 		animated_sprite.flip_h = false
 	look_vector.y = (Input.get_action_strength("look_up_%s" % [player_id]) - Input.get_action_strength("look_down_%s" % [player_id]))
 	if look_vector != Vector2.ZERO:
-		print("TURE")
 		crosshair.visible = true
 		crosshair.position = -(look_vector.normalized()*40)
 		controller_aim = true
@@ -131,7 +134,7 @@ func shoot():
 
 func take_damage(damage):
 	health -= damage
-	$UI/HUD/ProgressBar.value = health
+	update_health_bar()
 	hurt_player.stream = hurt_sounds.pick_random()
 	hurt_player.play()
 	if health <= 0:
@@ -141,12 +144,10 @@ func die():
 	if alive:
 		hurt_player.stream = death_sound
 		hurt_player.play()
-		print("Dead")
 		alive = false
 		velocity = Vector2.ZERO
 		#animation_player.play("die_%s" % [player_id])
 		#await animation_player.animation_finished
-		print("DONE")
 		visible = false
 		player_die.emit(self)
 
@@ -164,7 +165,7 @@ func _on_weapon_cooldown_timeout():
 	cooldown_progress.visible = false
 
 func upgrade_damage():
-	bullet_damage += 1#bullet_damage/2.0
+	bullet_damage += .5#bullet_damage/2.0
 	bullet_size += .1
 
 func upgrade_weapon_cooldown():
@@ -174,3 +175,17 @@ func upgrade_weapon_cooldown():
 
 func upgrade_bullet_speed():
 	bullet_speed += 10
+
+func upgrade_health():
+	max_health = max_health + max_health / 10.0
+	health = max_health
+	update_health_bar()
+func update_health_bar():
+	$UI/HUD/ProgressBar.value = health
+
+func activate_siren():
+	var siren = preload("res://Scenes/siren.tscn").instantiate()
+	siren.global_position = global_position
+	$SirenContainer.add_child(siren)
+	print("Called")
+	

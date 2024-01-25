@@ -143,6 +143,8 @@ func round_complete():
 	round_start_label.visible = false
 	print("Round Complete")
 	ambient_music_player.play()
+	player.health = player.max_health
+	player.update_health_bar()
 	if round == 11:
 		win_screen.visible = true
 
@@ -297,14 +299,11 @@ func update_player_cam():
 			var distance = player.global_position.distance_to(player2.global_position)
 			#var desired_zoom = abs(distance /200)
 			var zoom_factor = clamp(max_zoom-abs(distance /500), min_zoom, max_zoom)
-			#print(zoom_factor)
 			player_cam.zoom = Vector2(zoom_factor, zoom_factor)
 	else:
 		if !player.alive:
 				player_cam.global_position = beacon.global_position
 		else:
-			print("TRUER")
 			player_cam.global_position = player.global_position
-			print(player.global_position)
 			player_cam.zoom = Vector2(2.5,2.5)
 	
