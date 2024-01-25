@@ -55,7 +55,7 @@ func _physics_process(delta: float):
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if (!((beacon.global_position.x - distance_offset <= global_position.x and global_position.x <= beacon.global_position.x + distance_offset) and (beacon.global_position.y - distance_offset <= global_position.y and global_position.y <= beacon.global_position.y + distance_offset)) || player_in_range):
+		if (!((beacon.global_position.x - distance_offset <= global_position.x and global_position.x <= beacon.global_position.x + distance_offset) and (beacon.global_position.y - distance_offset <= global_position.y and global_position.y <= beacon.global_position.y + distance_offset)) || player_in_range || get_tree().get_first_node_in_group("siren") != null):
 			moving = true
 			move_and_slide()
 			if !animation_player.is_playing():
@@ -68,7 +68,11 @@ func make_path():
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if player_in_range:
+		var siren = get_tree().get_first_node_in_group("siren")
+		print(get_tree().get_first_node_in_group("siren"))
+		if siren != null:
+			navigation_agent.target_position = siren.global_position
+		elif player_in_range:
 			navigation_agent.target_position = player.global_position
 		else:
 			if x_distance_from_beacon > distance_offset || y_distance_from_beacon > distance_offset:
