@@ -50,7 +50,7 @@ offset_bottom = 255.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 19
-text = "	As one of the last survivors on earth, your only hope of survival is to protecti yourself within your facility. In order to survive nights, the central computer in the main room must be turned on. However, be warned – simply running your facility draws the attention of restless waves of AI enemies.
+text = "	As one of the last survivors on earth, your only hope of survival is to protect yourself within your facility. In order to survive nights, the central computer in the main room must be turned on. However, be warned – simply running your facility draws the attention of restless waves of AI enemies.
 
 	Strategize and manage your resources wisely as you face increasingly challenging waves of AI attackers. The key to survival lies in upgrading your defenses, and fortunately, you can access the store room at the top right of the facility to purchase powerful upgrades for your defenses and technologies. The only way to destroy an enemy is to overload its capacitors. However, fight with caution! The more energy the AI stores, the stronger they become! 
 
