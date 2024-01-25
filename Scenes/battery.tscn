@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsesdyuniinxb"]
+[gd_scene load_steps=7 format=3 uid="uid://bsesdyuniinxb"]
 
 [ext_resource type="Texture2D" uid="uid://mue8r6mx6gtt" path="res://Assets/Sprites/items.png" id="1_mee1m"]
+[ext_resource type="Texture2D" uid="uid://bk11ofhrjtb4h" path="res://Assets/Sprites/battery2.png" id="2_j3na0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sqjyn"]
 atlas = ExtResource("1_mee1m")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olmri"]
+atlas = ExtResource("2_j3na0")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dv274"]
 animations = [{
@@ -14,6 +19,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olmri")
+}],
+"loop": true,
+"name": &"updated",
 "speed": 5.0
 }]
 
@@ -28,6 +41,7 @@ collision_mask = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_dv274")
+animation = &"updated"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_y3cy1")
