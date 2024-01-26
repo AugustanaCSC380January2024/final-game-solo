@@ -13,7 +13,7 @@ extends Control
 @onready var player = self.get_parent().get_parent().get_node("Player")
 @onready var beacon = self.get_parent().get_parent().get_node("Beacon")
 
-var increase_rate = 1.2
+var increase_rate = 1.5
 signal spent_batteries
 
 
@@ -61,6 +61,7 @@ func _on_heal_beacon_button_pressed():
 		spend(int(heal_beacon_button.text))
 		heal_beacon_button.text = str(int(int(heal_beacon_button.text) * increase_rate))
 		beacon.current_health -= beacon.max_health / 10.0
+		get_parent().get_parent().update_beacon_health()
 		if beacon.current_health < 0:
 			beacon.current_health = 0
 
@@ -88,6 +89,8 @@ func _on_siren_duration_button_pressed():
 		spend(cost)
 		siren_duration_button.text = str(cost * 2)
 		player.upgrade_siren_duration()
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").upgrade_siren_duration()
 		if int(siren_duration_button.text) > 400:
 			siren_duration_button.text = "MAX"
 			siren_duration_button.disabled = true
@@ -99,6 +102,8 @@ func _on_siren_cooldown_button_pressed():
 		spend(cost)
 		siren_cooldown_button.text = str(cost * 2)
 		player.upgrade_siren_cooldown()
+		if is_two_player():
+			self.get_parent().get_parent().get_node("Player2").upgrade_siren_cooldown()
 		if int(siren_cooldown_button.text) > 400:
 			siren_cooldown_button.text = "MAX"
 			siren_cooldown_button.disabled = true

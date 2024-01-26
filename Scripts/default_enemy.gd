@@ -145,7 +145,7 @@ func _on_range_body_exited(body):
 			weapon_timer.stop()
 
 func shoot(body):
-	if alive:
+	if alive && get_tree().get_first_node_in_group("siren") == null:
 		animation_player.play("shoot")
 		await animation_player.animation_finished
 
