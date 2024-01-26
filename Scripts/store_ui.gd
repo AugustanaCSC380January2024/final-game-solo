@@ -5,6 +5,9 @@ extends Control
 @onready var fire_rate_button = $FireRateButton
 @onready var heal_player_button = $HealPlayerButton
 @onready var heal_beacon_button = $HealBeaconButton
+@onready var siren_duration_button = $SirenDurationButton
+@onready var siren_cooldown_button = $SirenCooldownButton
+
 @onready var batteries = self.get_parent().get_parent().batteries
 @onready var crosshair = self.get_parent().get_parent().crosshair
 @onready var player = self.get_parent().get_parent().get_node("Player")
@@ -76,3 +79,21 @@ func get_batteries():
 
 func is_two_player():
 	return self.get_parent().get_parent().two_players
+
+
+func _on_siren_duration_button_pressed():
+	get_batteries()
+	var cost = int(siren_duration_button.text)
+	if batteries >= cost:
+		spend(cost)
+		siren_duration_button.text = str(cost * 2)
+		player.upgrade_siren_duration()
+
+
+func _on_siren_cooldown_button_pressed():
+	get_batteries()
+	var cost = int(siren_cooldown_button.text)
+	if batteries >= cost:
+		spend(cost)
+		siren_cooldown_button.text = str(cost * 2)
+		player.upgrade_siren_cooldown()

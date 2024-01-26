@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://db5lq5ps2x3a7"]
+[gd_scene load_steps=17 format=3 uid="uid://db5lq5ps2x3a7"]
 
 [ext_resource type="Script" path="res://Scripts/store_ui.gd" id="1_iqgqi"]
 [ext_resource type="Texture2D" uid="uid://q70trgylka20" path="res://Assets/Sprites/props and items x1.png" id="1_wb4xa"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://diq5uhljeblb7" path="res://Assets/Upgrades/clock.png" id="3_38qir"]
 [ext_resource type="Texture2D" uid="uid://bvrf1xrwxlm3b" path="res://Assets/Upgrades/sword.png" id="4_whkfa"]
 [ext_resource type="Texture2D" uid="uid://bk11ofhrjtb4h" path="res://Assets/Sprites/battery2.png" id="6_u6cop"]
+[ext_resource type="Texture2D" uid="uid://nckksqbqxtto" path="res://Assets/Sprites/siren_cooldown.png" id="6_ulktq"]
+[ext_resource type="Texture2D" uid="uid://cyu5ks7cojcu5" path="res://Assets/Sprites/siren_duration.png" id="7_msavf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_flt3w"]
 font_size = 56
@@ -111,12 +113,12 @@ label_settings = SubResource("LabelSettings_flt3w")
 horizontal_alignment = 1
 
 [node name="RegenHealthSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(424, 504)
+position = Vector2(360, 546)
 scale = Vector2(6.5, 6.5)
 sprite_frames = SubResource("SpriteFrames_4c33p")
 
 [node name="RegenBeaconSprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(856, 504)
+position = Vector2(921.5, 546)
 scale = Vector2(6.5, 6.5)
 sprite_frames = SubResource("SpriteFrames_wjd4o")
 
@@ -134,6 +136,16 @@ texture = ExtResource("3_38qir")
 position = Vector2(432, 286)
 scale = Vector2(3, 3)
 texture = ExtResource("4_whkfa")
+
+[node name="SirenCooldown" type="Sprite2D" parent="."]
+position = Vector2(544, 529)
+scale = Vector2(3, 3)
+texture = ExtResource("6_ulktq")
+
+[node name="SirenDuration" type="Sprite2D" parent="."]
+position = Vector2(712, 529)
+scale = Vector2(3, 3)
+texture = ExtResource("7_msavf")
 
 [node name="DamageButton" type="Button" parent="."]
 layout_mode = 0
@@ -176,28 +188,54 @@ sprite_frames = SubResource("SpriteFrames_uqbhv")
 
 [node name="HealPlayerButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 392.0
-offset_top = 544.0
-offset_right = 456.0
-offset_bottom = 600.0
+offset_left = 328.0
+offset_top = 586.0
+offset_right = 392.0
+offset_bottom = 642.0
 text = "10
 "
 
 [node name="Battery Icon4" type="AnimatedSprite2D" parent="."]
-position = Vector2(477, 571)
+position = Vector2(413, 613)
 scale = Vector2(3.25, 3.25)
 sprite_frames = SubResource("SpriteFrames_uqbhv")
 
 [node name="HealBeaconButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 824.0
-offset_top = 544.0
-offset_right = 888.0
-offset_bottom = 600.0
+offset_left = 889.5
+offset_top = 586.0
+offset_right = 953.5
+offset_bottom = 642.0
 text = "50"
 
 [node name="Battery Icon5" type="AnimatedSprite2D" parent="."]
-position = Vector2(909, 571)
+position = Vector2(974.5, 613)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="SirenDurationButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 673.0
+offset_top = 586.0
+offset_right = 737.0
+offset_bottom = 642.0
+text = "50"
+
+[node name="Battery Icon6" type="AnimatedSprite2D" parent="."]
+position = Vector2(758, 613)
+scale = Vector2(3.25, 3.25)
+sprite_frames = SubResource("SpriteFrames_uqbhv")
+
+[node name="SirenCooldownButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 586.0
+offset_right = 564.0
+offset_bottom = 642.0
+text = "50"
+
+[node name="Battery Icon7" type="AnimatedSprite2D" parent="."]
+position = Vector2(585, 613)
 scale = Vector2(3.25, 3.25)
 sprite_frames = SubResource("SpriteFrames_uqbhv")
 
@@ -256,10 +294,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -288.0
-offset_top = 64.0
-offset_right = -144.0
-offset_bottom = 94.0
+offset_left = -374.5
+offset_top = 106.0
+offset_right = -185.5
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "+ 10% Health"
@@ -272,14 +310,50 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 120.0
-offset_top = 64.0
-offset_right = 309.0
-offset_bottom = 94.0
+offset_left = 177.0
+offset_top = 106.0
+offset_right = 383.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "- 10% Beacon"
 label_settings = SubResource("LabelSettings_ey843")
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 48.0
+offset_right = 6.0
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "- Siren
+Cooldown"
+label_settings = SubResource("LabelSettings_ey843")
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = 48.0
+offset_right = 178.0
+offset_bottom = 111.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+ Siren
+Duration"
+label_settings = SubResource("LabelSettings_ey843")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="DamageButton" to="." method="_on_damage_button_pressed"]
@@ -287,3 +361,5 @@ label_settings = SubResource("LabelSettings_ey843")
 [connection signal="pressed" from="FireRateButton" to="." method="_on_fire_rate_button_pressed"]
 [connection signal="pressed" from="HealPlayerButton" to="." method="_on_heal_player_button_pressed"]
 [connection signal="pressed" from="HealBeaconButton" to="." method="_on_heal_beacon_button_pressed"]
+[connection signal="pressed" from="SirenDurationButton" to="." method="_on_siren_duration_button_pressed"]
+[connection signal="pressed" from="SirenCooldownButton" to="." method="_on_siren_cooldown_button_pressed"]

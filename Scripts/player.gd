@@ -188,6 +188,12 @@ func upgrade_health():
 	update_health_bar()
 func update_health_bar():
 	$UI/HUD/ProgressBar.value = health
+	
+func upgrade_siren_duration():
+	siren_lifespan += 5
+
+func upgrade_siren_cooldown():
+	siren_cooldown -= 5
 
 func activate_siren():
 	if get_tree().get_first_node_in_group("siren") == null && !siren_on_cooldown:
