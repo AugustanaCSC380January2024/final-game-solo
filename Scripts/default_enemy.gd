@@ -30,7 +30,9 @@ var max_size = Vector2(1.5,1.5)
 @onready var collision_box = get_node("CollisionShape2D")
 @onready var hurt_audio_player = get_node("HurtSoundPlayer")
 @onready var shoot_sound_player = $ShootSoundPlayer
+@onready var game = get_parent().get_parent().get_parent().get_parent()
 
+signal dropping_batteries
 
 var player_detection_distance = 20
 var distance_offset = 64
@@ -42,6 +44,8 @@ func _ready():
 	set_health_bar()
 	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 	hurt_audio_player.stream = hurt_sound
+	print(game)
+	self.dropping_batteries.connect(game.drop_batteries)
 	update_size()
 	
 
@@ -111,11 +115,13 @@ func die():
 		hurt_audio_player.play()
 		await hurt_audio_player.finished
 		var spawner= get_parent()
-		for num in range(0, round*10):
-			if randi() % 2:
-				var battery_instance = battery.instantiate()
-				spawner.add_child(battery_instance)
-				battery_instance.global_position = global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
+		dropping_batteries.emit(round, global_position)
+		#battery_spawner.drop_batteries(round, global_position)
+		#for num in range(0, round*10):
+			#if randi() % 2:
+				#var battery_instance = battery.instantiate()
+				#spawner.add_child(battery_instance)
+				#battery_instance.global_position = global_position + Vector2(randf_range(-10,10), randf_range(-10,10))
 		#free()
 		queue_free()
 

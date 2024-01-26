@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://demdlgxu5hfaf"]
+
+[ext_resource type="Script" path="res://battery_dropper.gd" id="1_nn3no"]
+
+[node name="BatterySpawner" type="Node" groups=["battery_spawner"]]
+script = ExtResource("1_nn3no")

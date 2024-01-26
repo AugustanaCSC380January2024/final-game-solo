@@ -316,4 +316,7 @@ func update_player_cam():
 		else:
 			player_cam.global_position = player.global_position
 			player_cam.zoom = Vector2(2.5,2.5)
+			
+func drop_batteries(round, enemy_pos):
+	$BatterySpawner.drop_batteries(round, enemy_pos)
 	
