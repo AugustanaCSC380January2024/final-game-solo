@@ -202,6 +202,7 @@ func activate_siren():
 		siren.global_position = global_position
 		siren.life_span = siren_lifespan
 		$SirenContainer.add_child(siren)
+		await siren.get_node("LifeSpan").timeout
 		siren_cooldown_timer.start()
 		siren_on_cooldown = true
 		print("Called")
