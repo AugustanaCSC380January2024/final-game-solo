@@ -19,7 +19,7 @@ func _physics_process(delta):
 
 func shoot(body):
 	super.shoot(body)
-	if alive:
+	if alive && get_tree().get_first_node_in_group("siren") == null:
 		var wave = generate_wave(body)
 		projectile_container.add_child(wave)
 		shoot_sound_player.play()

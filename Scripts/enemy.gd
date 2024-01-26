@@ -11,7 +11,7 @@ func _ready():
 
 func shoot(body):
 	super.shoot(body)
-	if alive:
+	if alive && get_tree().get_first_node_in_group("siren") == null:
 		var projectile = generate_projectile(body)
 		projectile_container.add_child(projectile)
 		shoot_sound_player.play()
