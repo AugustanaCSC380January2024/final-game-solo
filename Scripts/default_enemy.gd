@@ -44,7 +44,6 @@ func _ready():
 	set_health_bar()
 	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 	hurt_audio_player.stream = hurt_sound
-	print(game)
 	update_size()
 	
 
