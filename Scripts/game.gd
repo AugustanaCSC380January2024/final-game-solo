@@ -145,6 +145,10 @@ func round_complete():
 	ambient_music_player.play()
 	player.health = player.max_health
 	player.update_health_bar()
+	if two_players:
+		var player2 = get_node("Player2")
+		player2.health = player2.max_health
+		player2.update_health_bar()
 	if round == 11:
 		win_screen.visible = true
 
