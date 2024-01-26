@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://73ubrde6tx5c"]
+[gd_scene load_steps=3 format=3 uid="uid://73ubrde6tx5c"]
+
+[ext_resource type="Texture2D" uid="uid://fvlsho0djydj" path="res://Assets/Untitled.svg" id="1_m6xl8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t2osk"]
 font_size = 32
@@ -31,3 +33,18 @@ offset_right = 356.0
 offset_bottom = 87.0
 step = 1.0
 value = 50.0
+
+[node name="SirenCooldownBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 54.0
+offset_right = 396.0
+offset_bottom = 448.0
+scale = Vector2(0.07, 0.07)
+max_value = 30.0
+value = 30.0
+fill_mode = 4
+texture_under = ExtResource("1_m6xl8")
+texture_progress = ExtResource("1_m6xl8")
+tint_under = Color(0.141176, 0.141176, 0.141176, 0.345098)
+tint_progress = Color(1, 0, 0, 1)

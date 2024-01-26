@@ -7,6 +7,7 @@ var base_damage = 2
 func _ready():
 	shoot_sound_player.stream = preload("res://Music/ESM_FVESK_fx_foley_repair_work_shop_laser_ufo_high_energy_beams_neon_high_2.wav")
 	health = 2
+	self.dropping_batteries.connect(game.drop_batteries)
 	super._ready()
 
 func shoot(body):

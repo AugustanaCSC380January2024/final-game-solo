@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://chqjk68g6bf13"]
+[gd_scene load_steps=30 format=3 uid="uid://chqjk68g6bf13"]
 
 [ext_resource type="PackedScene" uid="uid://ceb0lywmhusla" path="res://Scenes/enemy.tscn" id="1_v3j3w"]
 [ext_resource type="Script" path="res://Scripts/large_enemy.gd" id="2_pum37"]
@@ -35,6 +35,10 @@ region = Rect2(192, 320, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_s18yy"]
 atlas = ExtResource("3_hv5sh")
 region = Rect2(224, 320, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh3c0"]
+atlas = ExtResource("3_hv5sh")
+region = Rect2(288, 320, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_obxp8"]
 atlas = ExtResource("3_hv5sh")
@@ -126,6 +130,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s18yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh3c0")
 }],
 "loop": false,
 "name": &"die",

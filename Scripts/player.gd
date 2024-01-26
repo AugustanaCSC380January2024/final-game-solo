@@ -19,6 +19,7 @@ signal player_die
 
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $UI/HUD/ProgressBar
+@onready var siren_bar = $UI/HUD/SirenCooldownBar
 @onready var animation_player = $AnimationPlayer
 @onready var shot_player = $ShotPlayer
 @onready var battery_player = $BatteryPlayer
@@ -28,6 +29,7 @@ signal player_die
 @onready var cooldown_progress = $CooldownProgress
 @onready var crosshair = $Crosshair
 @onready var player_2_health_bar = $UI/HUD/ProgressBar
+@onready var player_2_siren_progress = $UI/HUD/SirenCooldownBar
 
 var shoot_sound = preload("res://Assets/Sounds/ESM_GW_gun_one_shot_hi_tech_machine_single_shot_4_energy_heavy_bass_short_1.wav")
 var battery_sound = preload("res://Music/CoinFlipTossRing_S08FO.689.wav")
@@ -65,6 +67,7 @@ func _ready():
 	siren_cooldown_timer.wait_time = siren_cooldown
 	if player_id == 2:
 		player_2_health_bar.global_position += Vector2(0,60)
+		player_2_siren_progress.global_position += Vector2(0,60)
 		
 
 func _process(delta):
@@ -76,6 +79,8 @@ func _process(delta):
 			print("Caught")
 			activate_siren()
 	cooldown_progress.value = weapon_cooldown.time_left
+	siren_bar.value = siren_cooldown - siren_cooldown_timer.time_left
+	
 
 func _physics_process(delta):
 	if alive:
@@ -195,6 +200,7 @@ func upgrade_siren_duration():
 func upgrade_siren_cooldown():
 	siren_cooldown -= 5
 	siren_cooldown_timer.wait_time = siren_cooldown
+	siren_bar.max_value = siren_cooldown
 
 func activate_siren():
 	if get_tree().get_first_node_in_group("siren") == null && !siren_on_cooldown:

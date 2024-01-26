@@ -2,6 +2,8 @@ extends DefaultEnemy
 
 var energy_wave_scene = preload("res://Scenes/Projectiles/energy_wave.tscn")
 
+@onready var game_node = get_parent().get_parent().get_parent()
+
 var base_damage = 50
 
 func _ready():
@@ -10,6 +12,7 @@ func _ready():
 	speed = 10
 	base_scale = 1.2
 	max_size = Vector2(1.3,1.3)
+	self.dropping_batteries.connect(game_node.drop_batteries)
 	super._ready()
 
 func _physics_process(delta):

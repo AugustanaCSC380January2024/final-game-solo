@@ -8,6 +8,7 @@ var base_damage = 4
 func _ready():
 	health = 5
 	shoot_sound_player.stream = preload("res://Music/ESM_GW_designed_shotgun_hi_tech_charge_boom_heavy_beefy_energy_shot_tech_1.wav")
+	self.dropping_batteries.connect(game.drop_batteries)
 	super._ready()
 
 func shoot(body):

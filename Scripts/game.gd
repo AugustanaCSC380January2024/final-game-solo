@@ -31,9 +31,9 @@ signal update_battery_display
 signal update_beacon_health_bar_max
 signal update_beacon_health_bar
 
-var round = 1
+var round = 5
 var first_round_enemy_count = 4
-var scaling_difficulty = 1
+var scaling_difficulty = 5
 var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false

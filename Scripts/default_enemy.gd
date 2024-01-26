@@ -45,7 +45,6 @@ func _ready():
 	beacon_location = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 	hurt_audio_player.stream = hurt_sound
 	print(game)
-	self.dropping_batteries.connect(game.drop_batteries)
 	update_size()
 	
 
