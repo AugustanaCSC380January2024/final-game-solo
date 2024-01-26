@@ -75,7 +75,7 @@ func _ready():
 		store_ui.heal_beacon_button = Loader.heal_beacon_button
 		introduction.hide()
 	else:
-		set_batteries(1000)
+		set_batteries(10000)
 	
 
 func _process(delta):
