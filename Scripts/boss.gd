@@ -28,7 +28,10 @@ func make_path():
 	if alive:
 		var x_distance_from_beacon = abs(beacon.global_position.x - global_position.x)
 		var y_distance_from_beacon = abs(beacon.global_position.y - global_position.y)
-		if x_distance_from_beacon > distance_offset || y_distance_from_beacon > distance_offset:
+		var siren = get_tree().get_first_node_in_group("siren")
+		if siren != null:
+			navigation_agent.target_position = siren.global_position
+		elif x_distance_from_beacon > distance_offset || y_distance_from_beacon > distance_offset:
 			navigation_agent.target_position = beacon.global_position + Vector2(randf_range(-10,10),randf_range(-10,10))
 
 func _on_weapon_timer_timeout():
