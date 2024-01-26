@@ -298,11 +298,17 @@ func update_player_cam():
 		var player2 = get_node("Player2")
 		if both_dead:
 			player_cam.global_position = beacon.global_position
+		elif !player.alive:
+			player_cam.global_position = player2.global_position
+			player_cam.zoom = Vector2(max_zoom,max_zoom)
+		elif !player2.alive:
+			player_cam.global_position = player.global_position
+			player_cam.zoom = Vector2(max_zoom,max_zoom)
 		else:
 			player_cam.global_position = (player.global_position + player2.global_position) * .5
 			var distance = player.global_position.distance_to(player2.global_position)
 			#var desired_zoom = abs(distance /200)
-			var zoom_factor = clamp(max_zoom-abs(distance /500), min_zoom, max_zoom)
+			var zoom_factor = clamp(max_zoom-abs(distance /300), min_zoom, max_zoom)
 			player_cam.zoom = Vector2(zoom_factor, zoom_factor)
 	else:
 		if !player.alive:
