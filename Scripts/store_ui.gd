@@ -10,7 +10,7 @@ extends Control
 @onready var player = self.get_parent().get_parent().get_node("Player")
 @onready var beacon = self.get_parent().get_parent().get_node("Beacon")
 
-var increase_rate = 1.5
+var increase_rate = 1.2
 signal spent_batteries
 
 
