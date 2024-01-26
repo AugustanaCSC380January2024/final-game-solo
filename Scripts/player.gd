@@ -194,11 +194,13 @@ func upgrade_siren_duration():
 
 func upgrade_siren_cooldown():
 	siren_cooldown -= 5
+	siren_cooldown_timer.wait_time = siren_cooldown
 
 func activate_siren():
 	if get_tree().get_first_node_in_group("siren") == null && !siren_on_cooldown:
 		var siren = preload("res://Scenes/siren.tscn").instantiate()
 		siren.global_position = global_position
+		siren.life_span = siren_lifespan
 		$SirenContainer.add_child(siren)
 		siren_cooldown_timer.start()
 		siren_on_cooldown = true

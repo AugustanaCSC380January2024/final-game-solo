@@ -3,7 +3,7 @@ extends StaticBody2D
 @onready var top_light = $Lights/TopLight
 @onready var bottom_light = $Lights/BottomLight
 @onready var life_span_timer = $LifeSpan
-@export var life_span = 3
+@export var life_span = 5
 
 var rotation_speed = 5
 

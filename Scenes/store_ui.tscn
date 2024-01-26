@@ -219,7 +219,7 @@ offset_left = 673.0
 offset_top = 586.0
 offset_right = 737.0
 offset_bottom = 642.0
-text = "50"
+text = "100"
 
 [node name="Battery Icon6" type="AnimatedSprite2D" parent="."]
 position = Vector2(758, 613)
@@ -232,7 +232,7 @@ offset_left = 500.0
 offset_top = 586.0
 offset_right = 564.0
 offset_bottom = 642.0
-text = "50"
+text = "100"
 
 [node name="Battery Icon7" type="AnimatedSprite2D" parent="."]
 position = Vector2(585, 613)
