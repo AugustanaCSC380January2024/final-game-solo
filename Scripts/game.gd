@@ -75,7 +75,7 @@ func _ready():
 		store_ui.heal_beacon_button = Loader.heal_beacon_button
 		introduction.hide()
 	else:
-		set_batteries(10000)
+		set_batteries(2000)
 	
 
 func _process(delta):
@@ -149,7 +149,7 @@ func round_complete():
 		var player2 = get_node("Player2")
 		player2.health = player2.max_health
 		player2.update_health_bar()
-	if round == 11:
+	if round == 6:
 		win_screen.visible = true
 
 func start_round():
