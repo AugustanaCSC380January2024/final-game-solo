@@ -15,6 +15,7 @@ var NETWORK_COOP = false
 @onready var press_e_to_start_label = $"CanvasLayer/Press E to start"
 @onready var open_store_label = $CanvasLayer/OpenStoreLabel
 @onready var ambient_music_player = $AmbientMusicPlayer
+@onready var round_display = $CanvasLayer/RoundDisplay
 
 @onready var beacon_sprite = $Beacon/AnimatedSprite2D
 @onready var audio_stream_player = $RoundMusicPlayer
@@ -31,9 +32,9 @@ signal update_battery_display
 signal update_beacon_health_bar_max
 signal update_beacon_health_bar
 
-var round = 5
+var round = 1
 var first_round_enemy_count = 4
-var scaling_difficulty = 5
+var scaling_difficulty = 1
 var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false
@@ -145,6 +146,7 @@ func round_complete():
 	ambient_music_player.play()
 	player.health = player.max_health
 	player.update_health_bar()
+	round_display.set_round_label(round)
 	if two_players:
 		var player2 = get_node("Player2")
 		player2.health = player2.max_health

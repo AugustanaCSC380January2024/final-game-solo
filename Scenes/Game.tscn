@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://moe1f3j4jv5q"]
+[gd_scene load_steps=20 format=3 uid="uid://moe1f3j4jv5q"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_wvqwh"]
 [ext_resource type="Texture2D" uid="uid://cltm4mawnfgm1" path="res://Assets/Sprites/preview.png" id="2_d3552"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b1glgh8v4uhpv" path="res://Scenes/pause_menu.tscn" id="7_3m5yg"]
 [ext_resource type="PackedScene" uid="uid://dtwyrh14vud6i" path="res://Scenes/battery_count.tscn" id="7_lisl0"]
 [ext_resource type="PackedScene" uid="uid://demdlgxu5hfaf" path="res://Scenes/battery_spawner.tscn" id="8_qfg6j"]
+[ext_resource type="PackedScene" uid="uid://biibgiwc2rpwe" path="res://Scenes/round_display.tscn" id="10_qemn8"]
 [ext_resource type="PackedScene" uid="uid://dls7fao8g2jch" path="res://Scenes/win_screen.tscn" id="10_rjgmj"]
 [ext_resource type="PackedScene" uid="uid://cspwcnb5tsy1s" path="res://Scenes/introduction.tscn" id="10_wbaxq"]
 [ext_resource type="AudioStream" uid="uid://6gwx67gmxtp5" path="res://Music/Rapture (Synthwave).wav" id="12_q4q2j"]
@@ -121,6 +122,8 @@ text = "Press \"E\" to start!"
 label_settings = SubResource("LabelSettings_kb3ud")
 
 [node name="Battery Count" parent="CanvasLayer" instance=ExtResource("7_lisl0")]
+
+[node name="RoundDisplay" parent="CanvasLayer" instance=ExtResource("10_qemn8")]
 
 [node name="Respawner" parent="CanvasLayer" instance=ExtResource("6_05mb5")]
 visible = false

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://biibgiwc2rpwe"]
+
+[ext_resource type="Script" path="res://Scripts/round_display.gd" id="1_kt85r"]
+
+[node name="RoundDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kt85r")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_top = 122.0
+offset_right = 41.0
+offset_bottom = 142.0
+grow_horizontal = 2
+text = "Round 1"
+horizontal_alignment = 1
