@@ -4920,8 +4920,8 @@ position = Vector2(467, 401)
 position = Vector2(526, 401)
 
 [node name="BossSpawnArea" type="Area2D" parent="."]
+position = Vector2(-191, 72)
 script = ExtResource("5_20brd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossSpawnArea"]
-position = Vector2(-193, 69)
 shape = SubResource("RectangleShape2D_eb6ho")
