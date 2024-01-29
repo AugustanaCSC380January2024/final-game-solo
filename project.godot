@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Final Project"
+config/name="AI Overcharged"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://Assets/upscaled.png"
 
 [autoload]
 
