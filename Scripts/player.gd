@@ -176,7 +176,7 @@ func _on_weapon_cooldown_timeout():
 	cooldown_progress.visible = false
 
 func upgrade_damage():
-	bullet_damage += .5#bullet_damage/2.0
+	bullet_damage += .6#bullet_damage/2.0
 	bullet_size += .1
 
 func upgrade_weapon_cooldown():

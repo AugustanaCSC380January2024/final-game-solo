@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1glgh8v4uhpv"]
+[gd_scene load_steps=3 format=3 uid="uid://b1glgh8v4uhpv"]
 
 [ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_arsnf"]
+[ext_resource type="PackedScene" uid="uid://cdxdjnq8q8hiw" path="res://Scenes/controls.tscn" id="2_io6n6"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 3
@@ -20,7 +21,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.423529)
+color = Color(0.117647, 0.117647, 0.117647, 0.745098)
+
+[node name="Controls" parent="." instance=ExtResource("2_io6n6")]
+layout_mode = 1
 
 [node name="Paused" type="Label" parent="."]
 layout_mode = 1

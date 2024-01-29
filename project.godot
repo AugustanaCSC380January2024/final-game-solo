@@ -19,6 +19,7 @@ config/icon="res://Assets/upscaled.png"
 
 GameManager="*res://game_manager.gd"
 Loader="*res://Scripts/loader.gd"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
 [display]
 
@@ -30,6 +31,10 @@ window/stretch/mode="canvas_items"
 
 movie_writer/movie_file="C:/Users/lukeh/Videos/AIOverload.avi"
 movie_writer/disable_vsync=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg")
 
 [gui]
 

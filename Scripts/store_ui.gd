@@ -91,7 +91,7 @@ func _on_siren_duration_button_pressed():
 		player.upgrade_siren_duration()
 		if is_two_player():
 			self.get_parent().get_parent().get_node("Player2").upgrade_siren_duration()
-		if int(siren_duration_button.text) > 400:
+		if int(siren_duration_button.text) > 200:
 			siren_duration_button.text = "MAX"
 			siren_duration_button.disabled = true
 
@@ -104,6 +104,6 @@ func _on_siren_cooldown_button_pressed():
 		player.upgrade_siren_cooldown()
 		if is_two_player():
 			self.get_parent().get_parent().get_node("Player2").upgrade_siren_cooldown()
-		if int(siren_cooldown_button.text) > 400:
+		if int(siren_cooldown_button.text) > 200:
 			siren_cooldown_button.text = "MAX"
 			siren_cooldown_button.disabled = true

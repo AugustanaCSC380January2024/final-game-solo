@@ -8,10 +8,10 @@ var base_damage = 50
 
 func _ready():
 	shoot_sound_player.stream = preload("res://Assets/Sounds/Shoot/FireballPassByHeavy_SFXB.63.wav")
-	health = 80
+	health = 40
 	speed = 10
-	base_scale = 1.2
-	max_size = Vector2(1.3,1.3)
+	base_scale = 1.0
+	max_size = Vector2(1.1,1.1)
 	self.dropping_batteries.connect(game_node.drop_batteries)
 	super._ready()
 

@@ -32,9 +32,9 @@ signal update_battery_display
 signal update_beacon_health_bar_max
 signal update_beacon_health_bar
 
-var round = 1
+var round = 5
 var first_round_enemy_count = 4
-var scaling_difficulty = 1
+var scaling_difficulty = 5
 var round_ongoing = false
 var done_spawning = false
 var player_in_start_region = false
@@ -76,7 +76,7 @@ func _ready():
 		store_ui.heal_beacon_button = Loader.heal_beacon_button
 		introduction.hide()
 	else:
-		set_batteries(2000)
+		set_batteries(10)
 	
 
 func _process(delta):
@@ -221,7 +221,6 @@ func game_over():
 	audio_stream_player.stop()
 	ambient_music_player.stream = game_over_sound
 	ambient_music_player.play()
-	await get_tree().create_timer(1.65).timeout
 	beacon.add_child(explosion)
 	await get_tree().create_timer(4).timeout
 	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")

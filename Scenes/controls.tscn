@@ -1,0 +1,142 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdxdjnq8q8hiw"]
+
+[ext_resource type="Texture2D" uid="uid://cna0glvxuuco" path="res://addons/controller_icons/assets/xboxone/x.png" id="1_w4pkn"]
+[ext_resource type="Texture2D" uid="uid://bfxo2jdawkbxl" path="res://addons/controller_icons/assets/xboxone/l_stick.png" id="2_d5fx7"]
+[ext_resource type="Texture2D" uid="uid://nqv3xt52o1e" path="res://addons/controller_icons/assets/xboxone/rt.png" id="3_b8jmx"]
+[ext_resource type="Texture2D" uid="uid://c3lkr5o5sqj06" path="res://addons/controller_icons/assets/xboxone/y.png" id="4_og3s8"]
+[ext_resource type="Texture2D" uid="uid://gxvdjyj5ur2w" path="res://addons/controller_icons/assets/xboxone/r_stick.png" id="5_84xus"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_esowb"]
+font_size = 24
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Player1Controls" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 67.0
+offset_right = 224.0
+offset_bottom = 87.0
+text = "Player 1 Controls:"
+label_settings = SubResource("LabelSettings_esowb")
+
+[node name="Interact1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 102.0
+offset_right = 224.0
+offset_bottom = 145.0
+text = "Interact: E"
+
+[node name="Move1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 148.0
+offset_right = 224.0
+offset_bottom = 191.0
+text = "Move:    W 
+          A S D"
+
+[node name="Shoot1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 204.0
+offset_right = 226.0
+offset_bottom = 224.0
+text = "Shoot: Left Mouse"
+
+[node name="Siren1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 247.0
+offset_right = 260.0
+offset_bottom = 267.0
+text = "Activate Siren: Space"
+
+[node name="Aim1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 296.0
+offset_right = 260.0
+offset_bottom = 316.0
+text = "Aim: Mouse"
+
+[node name="Player1Controls2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 67.0
+offset_right = 1231.0
+offset_bottom = 97.0
+text = "Player 2 Controls:"
+label_settings = SubResource("LabelSettings_esowb")
+
+[node name="Interact2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 102.0
+offset_right = 1135.0
+offset_bottom = 145.0
+text = "Interact: E"
+
+[node name="X" type="Sprite2D" parent="Interact2"]
+position = Vector2(111, 10)
+scale = Vector2(0.39, 0.39)
+texture = ExtResource("1_w4pkn")
+
+[node name="Move2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 148.0
+offset_right = 1135.0
+offset_bottom = 191.0
+text = "Move:    "
+
+[node name="LStick" type="Sprite2D" parent="Move2"]
+position = Vector2(96, 21)
+scale = Vector2(0.59, 0.59)
+texture = ExtResource("2_d5fx7")
+
+[node name="Shoot2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 204.0
+offset_right = 1137.0
+offset_bottom = 224.0
+text = "Shoot: "
+
+[node name="RTrigger" type="Sprite2D" parent="Shoot2"]
+position = Vector2(98, 16)
+scale = Vector2(0.545, 0.545)
+texture = ExtResource("3_b8jmx")
+
+[node name="Siren2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 247.0
+offset_right = 1171.0
+offset_bottom = 267.0
+text = "Activate Siren: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Siren2"]
+position = Vector2(176, 12)
+scale = Vector2(0.425, 0.425)
+texture = ExtResource("4_og3s8")
+
+[node name="Aim2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 950.0
+offset_top = 296.0
+offset_right = 1171.0
+offset_bottom = 316.0
+text = "Aim: "
+
+[node name="Sprite2D" type="Sprite2D" parent="Aim2"]
+position = Vector2(74, 14)
+scale = Vector2(0.54, 0.54)
+texture = ExtResource("5_84xus")
